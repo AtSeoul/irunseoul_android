@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">iRunSeoul</string>
+    <string name="title_event_detail">event Detail</string>
+    <string name="application_period">Application Period</string>
+    <string name="weather">Weather Forecast</string>
+    <string name="race_date">Date</string>
+    <string name="contact_number">Call</string>
+    <string name="website">Website</string>
+    <string name="daum_map">Daum Map</string>
+    <string name="login_strava">Strava Login</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="getting_started">Get Started</string>
+    <string name="already_member">Already a member? Log in</string>
+    <string name="title_activity_marathon_list">MarathonListActivity</string>
+    <string name="title_home">Recent</string>
+    <string name="title_dashboard">My runs</string>
+    <string name="title_profile">Profile</string>
+    <string name="getting_started_page_text">Sync your run record from your favorite running app with corresponding Marathon!</string>
+    <string name="dummy_marathon_name">Seoul International Marathon - Donga Ilbo blah blah</string>
+
+    <string name="unknown_response">Unexpected onActivityResult response code</string>
+    <string name="unknown_sign_in_response">Unknown response from AuthUI sign-in</string>
+    <string name="sign_in_cancelled">Sign in cancelled</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="signed_in_header">You are signed in!</string>
+    <string name="sign_out">Sign out</string>
+    <string name="unknown_error">An unknown error occurred</string>
+    <string name="sign_out_failed">Sign out failed</string>
+    <string name="run_synced">Congrats! Run synced</string>
+
+    <string name="running">Running</string>
+    <string name="dummy_date">2017/03/19 08:00</string>
+    <string name="dummy_elapsed_time">1:05:45</string>
+    <string name="dummy_distance">5.01 KM</string>
+    <string name="dummy_speed">8.5 KM/H</string>
+    <string name="title_activity_single_event">Event</string>
+    <string name="dummy_app_perioid">Application period : 2016/7/1 - 2016/11/28</string>
+    <string name="dummy_weather">Predicted Weather : 2.9C</string>
+
+    <string name="processing">Processing..</string>
+    <string name="fetching_data">Fetching data..</string>
+    <string name="already_added">Activity already added!</string>
+    <string name="error_user_fetch">Error: could not fetch user.</string>
+
+
+</resources>

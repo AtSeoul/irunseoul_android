@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.irunseoul.android.app.activities.SingleEventActivity"
+    android:background="@color/text_primary"
+    android:alpha="0.8"
+    tools:showIn="@layout/activity_single_event">
+
+    <TextView
+        android:layout_width="0dp"
+        android:padding="@dimen/icon_margin"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/RunTheme.Title"
+        android:text="@string/dummy_marathon_name"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/event_title" />
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/eventSynced"
+        android:visibility="invisible"
+        android:tint="@color/colorAccent"
+        android:src="@drawable/ic_done_black_48dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/map"
+        android:layout_marginStart="11dp"
+        app:layout_constraintTop_toBottomOf="@+id/event_title"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/eventDate">
+
+    </ImageView>
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/dummy_date"
+      tools:layout_constraintTop_creator="1"
+      tools:layout_constraintLeft_creator="1"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/event_title"
+      android:layout_marginLeft="8dp"
+      android:textAppearance="@style/RunTheme.text.date"
+      android:layout_marginTop="64dp"
+      android:layout_marginStart="10dp"
+      android:id="@+id/eventDate" />
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        class="com.google.android.gms.maps.MapFragment"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/eventDate"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+
+    <TextView
+        android:id="@+id/appPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/RunTheme.Secondary.Title"
+        android:text="@string/dummy_app_perioid"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintTop_toBottomOf="@+id/map"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp" />
+
+
+    <TextView
+        android:id="@+id/eventTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dummy_weather"
+        android:textAppearance="@style/RunTheme.Secondary.Title"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/appPeriod"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/eventTemp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        tools:layout_constraintLeft_creator="1">
+
+        <Button
+            android:id="@+id/eventWebsite"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/text_margin"
+            android:text="@string/website"
+            android:paddingEnd="@dimen/text_margin"
+            android:drawableStart="@drawable/ic_edit_black_36dp" />
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:drawableStart="@drawable/ic_contact_phone_black_36dp"-->
+            <!--android:id="@+id/eventPhone"-->
+            <!--android:textSize="12sp"-->
+            <!--android:layout_marginEnd="@dimen/text_margin"-->
+            <!--android:paddingStart="@dimen/text_margin"-->
+            <!--android:paddingEnd="@dimen/text_margin"-->
+            <!--android:text="@string/contact_number"-->
+            <!--android:layout_height="wrap_content" />-->
+        <Button
+            android:layout_width="wrap_content"
+            android:drawableStart="@drawable/ic_location_on_black_36dp"
+            android:text="@string/daum_map"
+            android:id="@+id/eventMapUrl"
+            android:paddingStart="@dimen/text_margin"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+    <com.sweetzpot.stravazpot.authenticaton.ui.StravaLoginButton
+        android:id="@+id/strava_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:type="orange"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintHorizontal_bias="0.502" />
+
+
+</android.support.constraint.ConstraintLayout>

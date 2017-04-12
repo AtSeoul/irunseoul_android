@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.irunseoul.android.app.activities.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="@dimen/icon_size"
+       android:layout_marginEnd="@dimen/icon_margin"
+       android:layout_gravity="start"
+       android:layout_marginTop="100dp"
+       android:textAppearance="@style/RunTheme.LandingPage.Title"
+       android:text="@string/getting_started_page_text"
+       android:id="@+id/textView"/>
+
+    <Button
+        android:id="@+id/sign_in"
+        android:layout_width="280dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="140dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        android:background="@color/colorPrimary"
+        android:text="@string/getting_started" />
+
+    <TextView
+        android:id="@+id/login_in"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_margin_list_item"
+        android:layout_marginTop="@dimen/text_margin"
+        android:textAppearance="@style/RunTheme.Subtitle"
+        android:text="@string/already_member"/>
+
+</LinearLayout>

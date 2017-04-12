@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/text_margin_list_item"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        card_view:cardBackgroundColor="@color/text_primary"
+        android:alpha="0.8"
+        android:elevation="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/icon_margin"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_marginStart="@dimen/icon_margin"
+                android:tint="@color/white"
+                android:src="@drawable/ic_directions_run_black_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/RunTheme.Subtitle"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/text_margin_list_item"
+                android:text="@string/running"/>
+
+
+            <TextView
+                android:id="@+id/eventDate"
+                android:textAppearance="@style/RunTheme.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginEnd="@dimen/icon_margin"
+                android:layout_gravity="center_vertical"
+                android:text="@string/dummy_date"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/eventTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/dummy_marathon_name"
+            android:padding="@dimen/title_padding"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/RunTheme.Title"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:layout_marginBottom="@dimen/icon_margin"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/linearlayout_list_margin">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:tint="@color/white"
+                    android:src="@drawable/ic_location_on_black_36dp"/>
+
+                <TextView
+                    android:id="@+id/runCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/text_margin_list_item"
+                    android:textAppearance="@style/RunTheme.Subtitle"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/dummy_elapsed_time"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/linearlayout_list_margin">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:tint="@color/white"
+                    android:id="@+id/runTempIcon"
+                    app:srcCompat="@drawable/ic_rain"/>
+
+                <TextView
+                    android:id="@+id/runTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/text_margin_list_item"
+                    android:textAppearance="@style/RunTheme.Subtitle"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/dummy_distance"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -1,0 +1,94 @@
+<resources>
+
+    <!-- category styles -->
+    <!-- Exists for inheritance purposes -->
+    <style name="RunTheme" parent="RunTheme.Base" />
+
+    <style name="RunTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:textColorPrimaryInverse">@color/text_light</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <style name="RunTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <!--<item name="windowTranslucentStatus">true</item>-->
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+
+    <style name="RunTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="RunTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="RunTheme.Title" parent="android:TextAppearance">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lines">2</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="RunTheme.LandingPage.Title" parent="android:TextAppearance">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="RunTheme.Secondary.Title" parent="android:TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+        <item name="android:layout_marginStart">@dimen/text_margin_list_item</item>
+        <item name="android:layout_marginLeft">@dimen/text_margin_list_item</item>
+        <item name="android:layout_gravity">center_vertical</item>
+
+    </style>
+
+    <style name="RunTheme.Subtitle" parent="android:TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+        <item name="android:layout_marginStart">@dimen/text_margin_list_item</item>
+        <item name="android:layout_marginLeft">@dimen/text_margin_list_item</item>
+        <item name="android:layout_gravity">center_vertical</item>
+
+    </style>
+
+    <style name="RunTheme.Detail.Subtitle" parent="android:TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="RunTheme.text.date" parent="android:TextAppearance">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+
+    <!--<style name="DarkTheme" parent="FirebaseUI">-->
+    <!--<item name="colorPrimary">@color/material_gray_900</item>-->
+    <!--<item name="colorPrimaryDark">@android:color/black</item>-->
+    <!--<item name="colorAccent">@android:color/black</item>-->
+    <!--<item name="android:colorBackground">@color/material_gray_850</item>-->
+    <!--<item name="android:colorForeground">@android:color/white</item>-->
+    <!--<item name="android:textColor">@color/text_default_material_dark_primary</item>-->
+    <!--<item name="android:textColorPrimary">@color/text_default_material_dark_primary</item>-->
+    <!--<item name="android:textColorPrimaryInverse">@color/text_default_material_light_primary</item>-->
+    <!--<item name="android:textColorSecondary">@color/text_default_material_dark_secondary</item>-->
+    <!--<item name="android:textColorSecondaryInverse">@color/text_default_material_light_secondary</item>-->
+    <!--<item name="android:windowBackground">@color/material_gray_850</item>-->
+    <!--</style>-->
+
+</resources>
