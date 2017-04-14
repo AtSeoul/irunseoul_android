@@ -2,6 +2,7 @@ package com.irunseoul.android.app.fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.irunseoul.android.app.R;
 import com.irunseoul.android.app.adapters.MyRunsRecycleViewAdapter;
 import com.irunseoul.android.app.model.Event;
 import com.irunseoul.android.app.model.MyRun;
+import com.irunseoul.android.app.utilities.PreferencesHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +116,7 @@ public class MyRunsFragment extends Fragment {
                     }
                     pastEventsRecyclerView.setAdapter(new MyRunsRecycleViewAdapter(myRunList, mListener));
                     Log.d(TAG, "Count is: " + dataSnapshot.getChildrenCount());
+
                 }  else {
 
                 }
@@ -163,6 +166,7 @@ public class MyRunsFragment extends Fragment {
 
         void onListFragmentInteraction(MyRun item);
         void onClickSyncRunButton();
+        void notifyMyMarathonCount(int count);
     }
 
     public String getUid() {

@@ -10,7 +10,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="188dp"
         card_view:cardBackgroundColor="@color/text_primary"
         android:alpha="0.8"
         android:elevation="10dp"
@@ -69,15 +69,12 @@
             android:layout_marginBottom="@dimen/icon_margin"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/linearlayout_list_margin">
 
                 <ImageView
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
                     android:tint="@color/white"
+                    android:layout_gravity="center"
                     android:src="@drawable/ic_location_on_black_36dp"/>
 
                 <TextView
@@ -87,33 +84,25 @@
                     android:layout_marginLeft="@dimen/text_margin_list_item"
                     android:textAppearance="@style/RunTheme.Subtitle"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/dummy_elapsed_time"/>
+                    android:layout_marginEnd="@dimen/icon_size"
+                    android:text="@string/dumy_city"/>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_marginEnd="@dimen/linearlayout_list_margin">
 
                 <ImageView
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:tint="@color/white"
                     android:id="@+id/runTempIcon"
-                    app:srcCompat="@drawable/ic_rain"/>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_cloudy_1" />
 
                 <TextView
                     android:id="@+id/runTemperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/text_margin_list_item"
-                    android:textAppearance="@style/RunTheme.Subtitle"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/dummy_distance"/>
+                    android:text="@string/dummy_temp"
+                    android:textAppearance="@style/RunTheme.Subtitle" />
 
-            </LinearLayout>
 
         </LinearLayout>
 

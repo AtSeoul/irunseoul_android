@@ -1,5 +1,6 @@
 package com.irunseoul.android.app.adapters;
 
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -17,6 +18,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import com.irunseoul.android.app.R;
 import com.irunseoul.android.app.model.Event;
+import com.irunseoul.android.app.utilities.PreferencesHelper;
 
 
 /**
@@ -34,6 +36,7 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
         Log.d(TAG, "PastEventRecyclerViewAdapter");
         mEvents = events;
         mListener = listener;
+
     }
 
     @Override
@@ -67,7 +70,6 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
             }
         }
 
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +84,9 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
 
     @Override
     public int getItemCount() {
+
+        if(mListener != null)
+            mListener.notifyMarathonCount(mEvents.size());
         return mEvents.size();
     }
 

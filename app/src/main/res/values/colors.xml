@@ -19,4 +19,6 @@
     <!--<color name="text_light">@android:color/white</color>-->
     <!--<color name="text_dark">#616161</color>-->
     <color name="white">#FFFFFF</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

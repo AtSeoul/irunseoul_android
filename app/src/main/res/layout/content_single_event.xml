@@ -117,11 +117,12 @@
 
         <Button
             android:id="@+id/eventWebsite"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_marginEnd="@dimen/text_margin"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:paddingStart="@dimen/text_margin"
             android:text="@string/website"
+            android:background="@color/colorPrimary"
             android:paddingEnd="@dimen/text_margin"
             android:drawableStart="@drawable/ic_edit_black_36dp" />
 
@@ -136,12 +137,14 @@
             <!--android:text="@string/contact_number"-->
             <!--android:layout_height="wrap_content" />-->
         <Button
-            android:layout_width="wrap_content"
-            android:drawableStart="@drawable/ic_location_on_black_36dp"
+            android:layout_width="130dp"
+            android:drawableStart="@drawable/ic_location_on_black_24"
             android:text="@string/daum_map"
             android:id="@+id/eventMapUrl"
+            android:background="@color/colorPrimary"
             android:paddingStart="@dimen/text_margin"
-            android:layout_height="wrap_content" />
+            android:paddingEnd="@dimen/text_margin"
+            android:layout_height="48dp" />
 
 
     </LinearLayout>

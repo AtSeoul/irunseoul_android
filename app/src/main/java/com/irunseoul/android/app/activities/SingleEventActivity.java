@@ -3,6 +3,8 @@ package com.irunseoul.android.app.activities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +38,7 @@ import com.irunseoul.android.app.model.Event;
 import com.irunseoul.android.app.model.MyRun;
 import com.irunseoul.android.app.model.StravaResultWrapper;
 import com.irunseoul.android.app.model.User;
+import com.irunseoul.android.app.utilities.PreferencesHelper;
 import com.sweetzpot.stravazpot.activity.api.ActivityAPI;
 import com.sweetzpot.stravazpot.activity.api.PhotoAPI;
 import com.sweetzpot.stravazpot.activity.model.Activity;
@@ -114,13 +118,10 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
     ImageView syncEventImg;
 
     @BindView(R.id.eventWebsite)
-    ImageView eventWebsite;
-
-    @BindView(R.id.eventPhone)
-    ImageView eventPhone;
+    Button eventWebsite;
 
     @BindView(R.id.eventMapUrl)
-    ImageView eventMapUrl;
+    Button eventMapUrl;
 
     @BindView(R.id.root_view)
     View rootView;
@@ -182,20 +183,21 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
     @OnClick(R.id.eventWebsite)
     public void openWebsite(View view) {
 
-
-
-    }
-
-    @OnClick(R.id.eventPhone)
-    public void callHost(View view) {
-
-
+        if(!mWebsite.isEmpty()) {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(mWebsite));
+            startActivity(i);
+        }
     }
 
     @OnClick(R.id.eventMapUrl)
     public void openMapView(View view) {
 
-
+        if(!mMapUrl.isEmpty()) {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(mMapUrl));
+            startActivity(i);
+        }
     }
 
     @Override
@@ -245,8 +247,8 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 
         eventTitle.setText(mTitle);
         eventDate.setText(mDate);
-        eventAppPerid.setText(String.format("Application %s", mAppPeriod));
-        eventTemp.setText(String.format("Weather prediction %s", mTemperature));
+        eventAppPerid.setText(String.format(getString(R.string.app_perioid), mAppPeriod));
+        eventTemp.setText(String.format(getString(R.string.predict_weather), mTemperature));
 
     }
 
@@ -438,8 +440,10 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                             Snackbar.make(rootView, getResources().getString(R.string.run_synced), Snackbar.LENGTH_LONG)
                                     .show();
                             progressDialog.dismiss();
+                            SharedPreferences pref = PreferencesHelper.getSharedPref(SingleEventActivity.this);
+                            PreferencesHelper.writePref(pref, PreferencesHelper.WHICH_FRAGMENT, 2);
                             showToastMessage(getResources().getString(R.string.run_synced));
-                           finish();
+                            finish();
                         }
                     });
 

@@ -78,6 +78,9 @@ public class MyRunsRecycleViewAdapter extends RecyclerView.Adapter<MyRunsRecycle
 
     @Override
     public int getItemCount() {
+
+        if(mListener != null)
+            mListener.notifyMyMarathonCount(mEvents.size());
         return mEvents.size();
     }
 

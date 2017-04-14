@@ -28,6 +28,13 @@ Getting Started
 This app uses the Gradle build system. To build this project, use the
 "gradlew build" command or use "Import Project" in Android Studio.
 
+Contributors
+---------------
+
+- Sujin Lee [KoreaMarathonAPI](https://github.com/sujinleeme/KoreaMarathonAPI)
+- Hassan Abid
+- Jiyeon Lee (Design help)
+
 License
 -------
 

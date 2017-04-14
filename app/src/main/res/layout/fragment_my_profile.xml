@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:name="com.irunseoul.android.app.fragments.MyProfileFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutManager="LinearLayoutManager"
+    android:paddingTop="56dp"
+    android:paddingBottom="@dimen/recycleview_marginbottom"
+    android:background="@color/text_primary"
+    android:alpha="0.8"
+    tools:context="com.irunseoul.android.app.fragments.MyProfileFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/RunTheme.Profile.Title"
+        android:text="@string/dummy_name"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="28dp"
+        android:id="@+id/userName"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/RunTheme.Profile.Title2"
+        android:text="@string/stats"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="96dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="107dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/logout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        android:id="@+id/frameLayout">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="156dp"
+            android:layout_height="156dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="152dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/myMarathonNumber"
+            android:elevation="@dimen/elevation_text"
+            android:text="@string/marathon_number"
+            android:textAppearance="@style/RunTheme.STATS.Title"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:elevation="@dimen/elevation_text"
+            android:text="@string/marathon_year"
+            android:layout_marginBottom="20dp"
+            android:textAppearance="@style/RunTheme.STATS.Subtitle"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:elevation="@dimen/elevation_text"
+            android:gravity="top|center_horizontal"
+            android:lines="2"
+            android:text="@string/marathon"
+            android:textAppearance="@style/RunTheme.STATS.Subtitle"
+            android:textColor="@android:color/white" />
+
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="156dp"
+            android:layout_height="156dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="152dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:elevation="@dimen/elevation_text"
+            android:id="@+id/marathonNumber"
+            android:text="@string/marathon_number"
+            android:textAppearance="@style/RunTheme.STATS.Title"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:elevation="@dimen/elevation_text"
+            android:text="@string/marathon_upcoming_year"
+            android:textAppearance="@style/RunTheme.STATS.Subtitle"
+            android:textColor="@android:color/white" />
+
+    </FrameLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:id="@+id/logout"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.irunseoul.android.app.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -23,22 +24,25 @@ import com.google.android.gms.tasks.Task;
 import com.irunseoul.android.app.R;
 
 import com.firebase.ui.auth.IdpResponse;
+import com.irunseoul.android.app.fragments.MyProfileFragment;
 import com.irunseoul.android.app.fragments.MyRunsFragment;
 import com.irunseoul.android.app.fragments.PastEventFragment;
 import com.irunseoul.android.app.model.Event;
 import com.irunseoul.android.app.model.MyRun;
+import com.irunseoul.android.app.utilities.PreferencesHelper;
 
 import butterknife.BindView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MarathonListActivity extends AppCompatActivity implements PastEventFragment.OnListFragmentInteractionListener,
-        MyRunsFragment.OnMyRunFragmentInteractionListener{
+        MyRunsFragment.OnMyRunFragmentInteractionListener, MyProfileFragment.OnMyProfileFragmentInteractionListener{
 
     private static final String TAG = MarathonListActivity.class.getSimpleName();
 
     private Fragment fragment;
     private FragmentManager fragmentManager;
     private BottomNavigationView navigation;
+    private Toolbar toolbar;
 
     @BindView(R.id.root_view)
     View mRootView;
@@ -51,14 +55,16 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     Log.d(TAG, "navigation_home");
+                    toolbar.setTitle(getString(R.string.marathon_events_2017));
                     fragment = PastEventFragment.newInstance();
                     break;
                 case R.id.navigation_dashboard:
+                    toolbar.setTitle(getString(R.string.my_marathon_events));
                     fragment = MyRunsFragment.newInstance();
                     break;
                 case R.id.navigation_notifications:
-//                    fragment = PastEventFragment.newInstance();
-                    signOut();
+                    toolbar.setTitle(getString(R.string.my_profile));
+                    fragment = MyProfileFragment.newInstance();
                     break;
             }
 
@@ -82,11 +88,35 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
         Log.d(TAG,"onResume");
         if(navigation != null) {
 
-            fragment = MyRunsFragment.newInstance();
+            SharedPreferences pref = PreferencesHelper.getSharedPref(this);
+            int fragNo = PreferencesHelper.getPrefVal(pref, PreferencesHelper.WHICH_FRAGMENT);
+
+            switch (fragNo) {
+
+                case 1 :
+                    toolbar.setTitle(getString(R.string.marathon_events_2017));
+                    fragment = PastEventFragment.newInstance();
+                    navigation.setSelectedItemId(R.id.navigation_home);
+
+                    break;
+                case 2:
+                    toolbar.setTitle(getString(R.string.my_marathon_events));
+                    fragment = MyRunsFragment.newInstance();
+                    navigation.setSelectedItemId(R.id.navigation_dashboard);
+                    break;
+                case 3:
+                    toolbar.setTitle(getString(R.string.my_profile));
+                    fragment = MyProfileFragment.newInstance();
+                    navigation.setSelectedItemId(R.id.navigation_notifications);
+                    break;
+                default:
+                    fragment = PastEventFragment.newInstance();
+                    toolbar.setTitle(getString(R.string.marathon_events_2017));
+                    break;
+            }
+
             final FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.fragment_container, fragment).commit();
-
-            navigation.setSelectedItemId(R.id.navigation_dashboard);
 
 
         }
@@ -99,12 +129,13 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
 
         setContentView(R.layout.activity_marathon_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
-        fragmentManager = getSupportFragmentManager();
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
+        fragmentManager = getSupportFragmentManager();
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
 
     public static Intent createIntent(Context context, IdpResponse idpResponse) {
@@ -153,6 +184,31 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
         transaction.replace(R.id.fragment_container, fragment).commit();
 
         navigation.setSelectedItemId(R.id.navigation_home);
+    }
+
+    @Override
+    public void notifyMarathonCount(int count) {
+
+        SharedPreferences pref = PreferencesHelper.getSharedPref(this);
+        PreferencesHelper.writePref(pref,
+                PreferencesHelper.KEY_UPCOMING_MARATHON_EVENTS,
+                count);
+    }
+
+    @Override
+    public void notifyMyMarathonCount(int count) {
+
+        SharedPreferences pref = PreferencesHelper.getSharedPref(this);
+        PreferencesHelper.writePref(pref,
+                PreferencesHelper.MY_MARATHON_EVENTS,
+                count);
+    }
+
+    @Override
+    public void clickLogout() {
+
+        signOut();
+
     }
 
     private void signOut() {
