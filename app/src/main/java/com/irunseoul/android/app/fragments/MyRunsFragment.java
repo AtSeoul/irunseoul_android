@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,9 +20,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.irunseoul.android.app.R;
+import com.irunseoul.android.app.activities.SingleEventActivity;
 import com.irunseoul.android.app.adapters.MyRunsRecycleViewAdapter;
 import com.irunseoul.android.app.model.Event;
 import com.irunseoul.android.app.model.MyRun;
+import com.irunseoul.android.app.utilities.NetworkHelper;
 import com.irunseoul.android.app.utilities.PreferencesHelper;
 
 import java.util.ArrayList;
@@ -38,7 +41,6 @@ import dmax.dialog.SpotsDialog;
 public class MyRunsFragment extends Fragment {
 
     private static final String TAG = MyRunsFragment.class.getSimpleName();
-    public static final String MARATHON_EVENT_DATABASE = "marathon_event";
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -86,17 +88,20 @@ public class MyRunsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_runs_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            pastEventsRecyclerView = (RecyclerView) view;
-            Log.d(TAG, "pastEventsRecyclerView : " + pastEventsRecyclerView);
 
-        }
+        pastEventsRecyclerView = (RecyclerView) view.findViewById(R.id.myRunlist);
+
         progressDialog = new SpotsDialog(getActivity(), getActivity().getResources().getString(R.string.fetching_data));
 
         if(myRunList == null) {
             progressDialog.show();
+        }
+
+        if(!NetworkHelper.isNetworkAvailable(getActivity())) {
+
+            showToastMessage(getActivity().getResources().getString(R.string.network_not_available));
+            progressDialog.dismiss();
+            return view;
         }
         // Read from the database
         mEventsQuery.addValueEventListener(new ValueEventListener() {
@@ -116,8 +121,6 @@ public class MyRunsFragment extends Fragment {
                     }
                     pastEventsRecyclerView.setAdapter(new MyRunsRecycleViewAdapter(myRunList, mListener));
                     Log.d(TAG, "Count is: " + dataSnapshot.getChildrenCount());
-
-                }  else {
 
                 }
                 progressDialog.dismiss();
@@ -172,5 +175,10 @@ public class MyRunsFragment extends Fragment {
     public String getUid() {
 
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    private void showToastMessage(String msg) {
+
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
     }
 }

@@ -3,6 +3,7 @@ package com.irunseoul.android.app.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -31,6 +34,8 @@ import com.irunseoul.android.app.model.Event;
 import com.irunseoul.android.app.model.MyRun;
 import com.irunseoul.android.app.utilities.PreferencesHelper;
 
+import java.io.File;
+
 import butterknife.BindView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -38,6 +43,8 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
         MyRunsFragment.OnMyRunFragmentInteractionListener, MyProfileFragment.OnMyProfileFragmentInteractionListener{
 
     private static final String TAG = MarathonListActivity.class.getSimpleName();
+
+    public static final String type = "image/*";
 
     private Fragment fragment;
     private FragmentManager fragmentManager;
@@ -171,7 +178,14 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
 
     @Override
     public void onListFragmentInteraction(MyRun item) {
+
         Log.d(TAG,"clicked myrun ");
+
+        if(!item.photo_url.isEmpty()) {
+
+            createInstagramIntent(item.photo_url);
+        }
+
     }
 
     @Override
@@ -189,6 +203,7 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
     @Override
     public void notifyMarathonCount(int count) {
 
+        Log.d(TAG,"notifyMarathonCount : " + count);
         SharedPreferences pref = PreferencesHelper.getSharedPref(this);
         PreferencesHelper.writePref(pref,
                 PreferencesHelper.KEY_UPCOMING_MARATHON_EVENTS,
@@ -238,4 +253,52 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_marathon_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_filter:
+
+                Log.d(TAG, "selected filter");
+                return true;
+
+    /*        case R.id.action_favorite:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                return true;*/
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    private void createInstagramIntent(String mediaPath){
+
+        // Create the new Intent using the 'Send' action.
+        Intent share = new Intent(Intent.ACTION_SEND);
+
+        // Set the MIME type
+        share.setType(type);
+
+        // Create the URI from the media
+//        File media = new File(mediaPath);
+//        Uri uri = Uri.fromFile(media);
+        Uri uri = Uri.parse(mediaPath);
+
+        // Add the URI to the Intent.
+        share.putExtra(Intent.EXTRA_STREAM, uri);
+
+        // Broadcast the Intent.
+        startActivity(Intent.createChooser(share, "Share to"));
+    }
 }

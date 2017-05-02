@@ -31,7 +31,7 @@ public class MyRunsRecycleViewAdapter extends RecyclerView.Adapter<MyRunsRecycle
     private final OnMyRunFragmentInteractionListener mListener;
 
     public MyRunsRecycleViewAdapter(List<MyRun> events, OnMyRunFragmentInteractionListener listener) {
-        Log.d(TAG, "MyRunsRecycleViewAdapter");
+        Log.d(TAG, "MyRunsRecycleViewAdapter | events :" + events + " listener: " + listener);
         mEvents = events;
         mListener = listener;
     }

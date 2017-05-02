@@ -16,8 +16,13 @@ import com.irunseoul.android.app.fragments.PastEventFragment.OnListFragmentInter
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.irunseoul.android.app.R;
 import com.irunseoul.android.app.model.Event;
+import com.irunseoul.android.app.utilities.DateHelper;
 import com.irunseoul.android.app.utilities.PreferencesHelper;
 
 
@@ -51,24 +56,26 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
         holder.mItem = mEvents.get(position);
         holder.mTitleView.setText(holder.mItem.title);
         holder.mDateView.setText(holder.mItem.date);
-        holder.mRunCity.setText(holder.mItem.city);
-        holder.mRunTemperature.setText(holder.mItem.temperature);
+        holder.mRunCity.setText(holder.mItem.location);
+        Resources res = holder.mTitleView.getContext().getResources();
 
         if(!holder.mItem.weather.isEmpty()) {
-            Resources res = holder.mTitleView.getContext().getResources();
             String weather_name = holder.mItem.weather.replace("-", "_");
             String drawableName = "ic_" + weather_name;
             int drawableResourceId = res.getIdentifier(drawableName,"drawable", holder.mTitleView.getContext().getPackageName());
-            Log.d(TAG, "iconResourceId : " + drawableResourceId + " drawableName :" + drawableName);
             try {
                 Drawable drawable = res.getDrawable(drawableResourceId);
-                VectorDrawable vectorDrawable = (VectorDrawable) drawable;
-                holder.mTempIcon.setImageDrawable(vectorDrawable);
+                holder.mTempIcon.setImageDrawable(drawable);
             } catch (Exception e) {
 
                 Log.d(TAG, "exception while getting drawable : "  + e.getMessage());
             }
+
         }
+
+        int diffDays = DateHelper.getDaysDiff(holder.mItem.date);
+
+        holder.mdaysLeft.setText(String.format(Locale.US,res.getString(R.string.d_day), diffDays));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +87,23 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
                 }
             }
         });
+
+        String[] result =  holder.mItem.application_period.split("-\\s");
+        if(result != null) {
+
+            if(result.length > 1) {
+                if (DateHelper.isApplicationPeriod(result[1])) {
+                    holder.applicationImage.setVisibility(View.VISIBLE);
+                } else {
+                    holder.applicationImage.setVisibility(View.INVISIBLE);
+                }
+            }
+        }
+
     }
 
     @Override
     public int getItemCount() {
-
-        if(mListener != null)
-            mListener.notifyMarathonCount(mEvents.size());
         return mEvents.size();
     }
 
@@ -94,9 +111,10 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
         public final View mView;
         public final TextView mTitleView;
         public final TextView mRunCity;
-        public final TextView mRunTemperature;
         public final TextView mDateView;
         public final ImageView mTempIcon;
+        public final TextView mdaysLeft;
+        public final ImageView applicationImage;
         public Event mItem;
 
         public ViewHolder(View view) {
@@ -105,8 +123,9 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
             mTitleView = (TextView) view.findViewById(R.id.eventTitle);
             mDateView = (TextView) view.findViewById(R.id.eventDate);
             mRunCity = (TextView) view.findViewById(R.id.runCity);
-            mRunTemperature = (TextView) view.findViewById(R.id.runTemperature);
             mTempIcon = (ImageView) view.findViewById(R.id.runTempIcon);
+            mdaysLeft = (TextView) view.findViewById(R.id.daysLeft);
+            applicationImage = (ImageView) view.findViewById(R.id.applicationImage);
         }
 
         @Override

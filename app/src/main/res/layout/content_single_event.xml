@@ -10,9 +10,10 @@
     android:alpha="0.8"
     tools:showIn="@layout/activity_single_event">
 
+
     <TextView
         android:layout_width="0dp"
-        android:padding="@dimen/icon_margin"
+        android:padding="@dimen/text_margin"
         android:layout_height="wrap_content"
         android:textAppearance="@style/RunTheme.Title"
         android:text="@string/dummy_marathon_name"
@@ -22,8 +23,22 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/event_title" />
+        android:id="@+id/event_title"
+        app:layout_constraintHorizontal_bias="0.0" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/eventLocation"
+        android:layout_height="wrap_content"
+        android:text="@string/dummy_location"
+        android:layout_marginStart="16dp"
+        android:textAppearance="@style/RunTheme.Secondary.Title"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/appPeriod"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="14dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageView
         android:layout_width="30dp"
@@ -39,7 +54,9 @@
         app:layout_constraintTop_toBottomOf="@+id/event_title"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="16dp"
-        app:layout_constraintLeft_toRightOf="@+id/eventDate">
+        app:layout_constraintLeft_toRightOf="@+id/eventDate"
+        android:layout_marginLeft="12dp"
+        app:layout_constraintVertical_bias="0.758">
 
     </ImageView>
 
@@ -47,20 +64,18 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/dummy_date"
-      tools:layout_constraintTop_creator="1"
-      tools:layout_constraintLeft_creator="1"
-      app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintTop_toTopOf="@+id/event_title"
-      android:layout_marginLeft="8dp"
       android:textAppearance="@style/RunTheme.text.date"
-      android:layout_marginTop="64dp"
-      android:layout_marginStart="10dp"
-      android:id="@+id/eventDate" />
+      android:layout_marginTop="69dp"
+      android:id="@+id/eventDate"
+      tools:layout_constraintLeft_creator="1"
+      app:layout_constraintLeft_toLeftOf="@+id/event_title"
+      android:layout_marginLeft="16dp" />
 
     <fragment
         android:id="@+id/map"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="194dp"
         class="com.google.android.gms.maps.MapFragment"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -81,7 +96,7 @@
         android:text="@string/dummy_app_perioid"
         tools:layout_constraintTop_creator="1"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="47dp"
         app:layout_constraintTop_toBottomOf="@+id/map"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -119,9 +134,11 @@
             android:id="@+id/eventWebsite"
             android:layout_width="130dp"
             android:layout_marginEnd="@dimen/text_margin"
-            android:layout_height="48dp"
+            android:layout_height="36dp"
             android:paddingStart="@dimen/text_margin"
             android:text="@string/website"
+            android:drawableTint="@color/white"
+            android:textColor="@color/white"
             android:background="@color/colorPrimary"
             android:paddingEnd="@dimen/text_margin"
             android:drawableStart="@drawable/ic_edit_black_36dp" />
@@ -141,10 +158,12 @@
             android:drawableStart="@drawable/ic_location_on_black_24"
             android:text="@string/daum_map"
             android:id="@+id/eventMapUrl"
+            android:drawableTint="@color/white"
+            android:textColor="@color/white"
             android:background="@color/colorPrimary"
             android:paddingStart="@dimen/text_margin"
             android:paddingEnd="@dimen/text_margin"
-            android:layout_height="48dp" />
+            android:layout_height="36dp" />
 
 
     </LinearLayout>
@@ -153,13 +172,13 @@
     <com.sweetzpot.stravazpot.authenticaton.ui.StravaLoginButton
         android:id="@+id/strava_login_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:layout_gravity="center"
         app:type="orange"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1"

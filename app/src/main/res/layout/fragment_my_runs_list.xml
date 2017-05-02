@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="@dimen/my_run_button_width"
+        android:layout_height="@dimen/my_run_button_height"
+        android:text="@string/sync_your_first_run"
+        android:visibility="invisible"
+        android:id="@+id/syncFirstRun"
+        android:textAppearance="@style/RunTheme.STATS.Subtitle"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center"/>
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/myRunlist"
     android:name="com.irunseoul.android.app.fragments.PastEventFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,3 +26,4 @@
     android:paddingBottom="@dimen/recycleview_marginbottom"
     tools:context="com.irunseoul.android.app.fragments.PastEventFragment"
     tools:listitem="@layout/myruns_list_content" />
+</FrameLayout>

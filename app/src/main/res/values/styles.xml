@@ -87,10 +87,29 @@
 
     </style>
 
+    <style name="RunTheme.Days.Title" parent="android:TextAppearance">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+        <item name="android:layout_marginStart">@dimen/text_margin_list_item</item>
+        <item name="android:layout_marginEnd">@dimen/fab_margin</item>
+
+    </style>
+
     <style name="RunTheme.Subtitle" parent="android:TextAppearance">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_light</item>
         <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+        <item name="android:layout_marginStart">@dimen/text_margin_list_item</item>
+        <item name="android:layout_marginLeft">@dimen/text_margin_list_item</item>
+        <item name="android:layout_gravity">center_vertical</item>
+
+    </style>
+
+    <style name="RunTheme.MyRun.Stats" parent="android:TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
         <item name="android:layout_marginStart">@dimen/text_margin_list_item</item>
         <item name="android:layout_marginLeft">@dimen/text_margin_list_item</item>
         <item name="android:layout_gravity">center_vertical</item>

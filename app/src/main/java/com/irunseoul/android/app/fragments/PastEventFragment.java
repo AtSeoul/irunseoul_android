@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.irunseoul.android.app.R;
 import com.irunseoul.android.app.adapters.PastEventRecyclerViewAdapter;
 import com.irunseoul.android.app.model.Event;
+import com.irunseoul.android.app.utilities.DateHelper;
+import com.irunseoul.android.app.utilities.NetworkHelper;
 import com.irunseoul.android.app.utilities.PreferencesHelper;
 
 import java.util.ArrayList;
@@ -74,7 +77,7 @@ public class PastEventFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference(MARATHON_EVENT_DATABASE);
         //TODO: Date Format for today 2016/09/15 08:00 - Add Tabs UpComing and Past
 //        final Query mEventsQuery = mDatabase.child("2016").orderByChild("date").limitToLast(20).startAt("2016/09/15 08:00");
-        mEventsQuery = mDatabase.child("2017").orderByChild("date").startAt("2017/03/15 08:00");
+        mEventsQuery = mDatabase.child(DateHelper.getCurrentYear()).orderByChild("date").startAt(DateHelper.getCurrentDate());
 
     }
 
@@ -94,14 +97,21 @@ public class PastEventFragment extends Fragment {
 
         // Read from the database
         if(mEventList == null) {
-            progressDialog.show();
+            //TODO: Find a way to handle this better
+//            progressDialog.show();
+        }
+        if(!NetworkHelper.isNetworkAvailable(getActivity())) {
+
+            showToastMessage(getActivity().getResources().getString(R.string.network_not_available));
+            progressDialog.dismiss();
+            return view;
         }
         mEventsQuery.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
                 mEventList = new ArrayList<Event>();
 
                 if(dataSnapshot.exists()) {
@@ -162,6 +172,10 @@ public class PastEventFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
 
         void onListFragmentInteraction(Event item);
-        void notifyMarathonCount(int count);
+    }
+
+    private void showToastMessage(String msg) {
+
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
     }
 }

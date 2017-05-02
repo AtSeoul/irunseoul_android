@@ -12,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,12 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.irunseoul.android.app.R;
-import com.irunseoul.android.app.adapters.MyRunsRecycleViewAdapter;
 import com.irunseoul.android.app.model.MyRun;
+import com.irunseoul.android.app.utilities.DateHelper;
 import com.irunseoul.android.app.utilities.PreferencesHelper;
 
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,7 +44,7 @@ import dmax.dialog.SpotsDialog;
 public class MyProfileFragment extends Fragment {
 
     private static final String TAG = MyProfileFragment.class.getSimpleName();
-    public static final String MARATHON_EVENT_DATABASE = "marathon_event";
+    public static final String MARATHON_EVENT_DATABASE = "event";
 
     private OnMyProfileFragmentInteractionListener mListener;
 
@@ -66,10 +66,13 @@ public class MyProfileFragment extends Fragment {
     TextView userName;
 
     @BindView(R.id.marathonNumber)
-    TextView totaMarathons;
+    TextView totalMarathons;
 
     @BindView(R.id.myMarathonNumber)
     TextView myMarathonNumbers;
+
+    @BindView(R.id.userPhoto)
+    ImageView userPhoto;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -144,19 +147,59 @@ public class MyProfileFragment extends Fragment {
     public interface OnMyProfileFragmentInteractionListener {
 
         void clickLogout();
+        void notifyMarathonCount(int count);
     }
 
     private void setUI() {
+
+        if(photoUrl() != null) {
+
+            Glide.with(getActivity())
+                    .load(photoUrl().toString())
+                    .centerCrop()
+                    .crossFade()
+                    .into(userPhoto);
+
+            userPhoto.setVisibility(View.VISIBLE);
+        }
 
         String user_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         userName.setText(user_name);
 
         SharedPreferences pref = PreferencesHelper.getSharedPref(getActivity());
         int marathon_events = PreferencesHelper.getPrefVal(pref, PreferencesHelper.KEY_UPCOMING_MARATHON_EVENTS);
+        if(marathon_events == 0) {
+
+            DatabaseReference database = FirebaseDatabase.getInstance().getReference(MARATHON_EVENT_DATABASE);;
+            Query eventsQuery = database.child(DateHelper.getCurrentYear()).orderByChild("date").startAt(DateHelper.getCurrentDate());;
+
+            eventsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    if(dataSnapshot.exists()) {
+
+                        int count = (int) dataSnapshot.getChildrenCount();
+                        mListener.notifyMarathonCount(count);
+                        totalMarathons.setText(String.valueOf(count));
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        } else {
+
+            totalMarathons.setText(String.valueOf(marathon_events));
+        }
+
         int my_marathon_events = PreferencesHelper.getPrefVal(pref, PreferencesHelper.MY_MARATHON_EVENTS);
 
         myMarathonNumbers.setText(String.valueOf(my_marathon_events));
-        totaMarathons.setText(String.valueOf(marathon_events));
 
 
     }

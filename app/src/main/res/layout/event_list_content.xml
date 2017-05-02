@@ -10,7 +10,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="match_parent"
-        android:layout_height="188dp"
+        android:layout_height="156dp"
         card_view:cardBackgroundColor="@color/text_primary"
         android:alpha="0.8"
         android:elevation="10dp"
@@ -25,8 +25,8 @@
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
                 android:layout_marginStart="@dimen/icon_margin"
-                android:tint="@color/white"
-                android:src="@drawable/ic_directions_run_black_48dp"/>
+                android:id="@+id/runTempIcon"
+                android:src="@drawable/ic_clear_day"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -34,18 +34,18 @@
                 android:textAppearance="@style/RunTheme.Subtitle"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/text_margin_list_item"
-                android:text="@string/running"/>
+                android:id="@+id/eventDate"
+                android:text="@string/dummy_date"/>
 
 
             <TextView
-                android:id="@+id/eventDate"
-                android:textAppearance="@style/RunTheme.Subtitle"
-                android:layout_width="match_parent"
+                android:id="@+id/daysLeft"
+                android:textAppearance="@style/RunTheme.Days.Title"
+                android:layout_width="194dp"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:layout_marginEnd="@dimen/icon_margin"
                 android:layout_gravity="center_vertical"
-                android:text="@string/dummy_date"/>
+                android:text="@string/dummy_days_left"/>
 
         </LinearLayout>
         <TextView
@@ -67,9 +67,14 @@
             android:layout_marginStart="@dimen/text_margin"
             android:layout_marginEnd="@dimen/text_margin"
             android:layout_marginBottom="@dimen/icon_margin"
+            android:orientation="horizontal"
             android:layout_height="wrap_content">
 
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="0.7">
                 <ImageView
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
@@ -87,21 +92,15 @@
                     android:layout_marginEnd="@dimen/icon_size"
                     android:text="@string/dumy_city"/>
 
-
+            </LinearLayout>
                 <ImageView
-                    android:id="@+id/runTempIcon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:id="@+id/applicationImage"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
                     android:tint="@color/white"
-                    app:srcCompat="@drawable/ic_cloudy_1" />
-
-                <TextView
-                    android:id="@+id/runTemperature"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/dummy_temp"
-                    android:textAppearance="@style/RunTheme.Subtitle" />
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_edit_black_36dp"/>
 
 
         </LinearLayout>

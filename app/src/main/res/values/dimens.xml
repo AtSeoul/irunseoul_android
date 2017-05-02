@@ -16,8 +16,11 @@
 
     <dimen name="linearlayout_list_margin">20dp</dimen>
     <dimen name="recycleview_margintop">56dp</dimen>
-    <dimen name="recycleview_marginbottom">48dp</dimen>
+    <dimen name="recycleview_marginbottom">52dp</dimen>
     <dimen name="elevation_text">16dp</dimen>
+    <dimen name="user_photo">68dp</dimen>
+    <dimen name="my_run_button_width">200dp</dimen>
+    <dimen name="my_run_button_height">48dp</dimen>
 
 
 </resources>

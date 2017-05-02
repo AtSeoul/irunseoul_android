@@ -20,7 +20,6 @@ public class PreferencesHelper {
 
     public static SharedPreferences getSharedPref(Context context) {
 
-        Log.d(TAG, "context : " + context);
         SharedPreferences sharedPref = context.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
         return sharedPref;
 

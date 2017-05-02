@@ -2,17 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@color/colorPrimary"
     tools:context="com.irunseoul.android.app.activities.SplashScreenActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:src="@drawable/landing_page_back"
-        android:textColor="#33b5e5"
-        android:alpha="0.5"
-        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/fullscreen_content"

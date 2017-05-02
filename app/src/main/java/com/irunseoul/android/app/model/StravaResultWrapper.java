@@ -10,4 +10,5 @@ public class StravaResultWrapper {
 
     public Activity activity;
     public String photo_url = "";
+    public String user_photo_url = "";
 }

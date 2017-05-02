@@ -28,6 +28,20 @@ Getting Started
 This app uses the Gradle build system. To build this project, use the
 "gradlew build" command or use "Import Project" in Android Studio.
 
+#### Screenshots
+
+Marathon Events
+
+![listactivity](screenshots/image1.png)
+
+Detail Event
+
+![detailactivity](screenshots/image2.png)
+
+My Profile
+
+![myprofile](screenshots/image3.png)
+
 Contributors
 ---------------
 

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,8 +25,12 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -96,6 +101,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 
     private DatabaseReference mDatabase;
     private Query mExistingRunQuery;
+    private StravaConfig stravaConfig;
 
     private AlertDialog progressDialog;
 
@@ -122,6 +128,9 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 
     @BindView(R.id.eventMapUrl)
     Button eventMapUrl;
+
+    @BindView(R.id.eventLocation)
+    TextView eventLocation;
 
     @BindView(R.id.root_view)
     View rootView;
@@ -167,6 +176,8 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
     @OnClick(R.id.strava_login_button)
     public void connectStrava(View view) {
 
+        //TODO : Change AccessScope to VIEW_PRIVATE
+
         String redirctURL = BuildConfig.STRAVA_REDIRECT_URL;
         int clientId = BuildConfig.STRAVA_CLIENT_ID;
         Log.d(TAG, "redirectURL : " + redirctURL + " clientId: "  + clientId);
@@ -174,7 +185,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                 .withClientID(clientId)
                 .withRedirectURI(redirctURL)
                 .withApprovalPrompt(ApprovalPrompt.AUTO.AUTO)
-                .withAccessScope(AccessScope.VIEW_PRIVATE_WRITE)
+                .withAccessScope(AccessScope.VIEW_PRIVATE)
                 .makeIntent();
         startActivityForResult(intent, RQ_LOGIN);
 
@@ -249,6 +260,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
         eventDate.setText(mDate);
         eventAppPerid.setText(String.format(getString(R.string.app_perioid), mAppPeriod));
         eventTemp.setText(String.format(getString(R.string.predict_weather), mTemperature));
+        eventLocation.setText(mLocation);
 
     }
 
@@ -271,7 +283,6 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
         new StravaTokenTask().execute(code, mDate);
 
 
-
     }
 
     private class StravaTokenTask extends AsyncTask<String, Void, StravaResultWrapper> {
@@ -292,7 +303,11 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                     .withCode(code)
                     .execute();
 
-            StravaConfig stravaConfig = StravaConfig.withToken(result.getToken())
+            if(result.getAthlete().getProfile() != null) {
+                wrapper.user_photo_url = result.getAthlete().getProfile();
+            }
+
+             stravaConfig = StravaConfig.withToken(result.getToken())
                     .debug()
                     .build();
 
@@ -330,7 +345,9 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                     List<Photo> photos = photoAPI.listAcivityPhotos(activity.getID())
                             .execute();
                     if(photos.size() > 0) {
-                        Log.d(TAG, "photos : " + photos.get(0).getUrls().get("0"));
+                        for(Photo photo: photos) {
+                            Log.d(TAG, "photos : " +photo.getUrls().toString());
+                        }
                         wrapper.photo_url  = photos.get(0).getUrls().get("0");
 
                     }
@@ -368,6 +385,11 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 
     private void addNewRun(final StravaResultWrapper result) {
 
+        if(result.activity == null) {
+            showToastMessage(getResources().getString(R.string.no_activity_record));
+            progressDialog.dismiss();
+            return;
+        }
 
         final String userId = getUid();
         mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
@@ -394,6 +416,8 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                         Log.w(TAG, "getUser:onCancelled", databaseError.toException());
                     }
                 });
+
+        addUserPhoto(result.user_photo_url);
     }
 
 
@@ -460,6 +484,25 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
         });
 
 
+    }
+
+    private void addUserPhoto(String photo_url) {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(Uri.parse(photo_url))
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User profile updated.");
+                        }
+                    }
+                });
     }
 
     @Override
