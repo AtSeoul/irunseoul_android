@@ -15,9 +15,10 @@ android {
         applicationId "com.irunseoul.android.app"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 2
+        versionCode 4
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {

@@ -13,6 +13,8 @@ import com.irunseoul.android.app.fragments.MyRunsFragment.OnMyRunFragmentInterac
 
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.irunseoul.android.app.R;
 import com.irunseoul.android.app.model.Event;
@@ -55,7 +57,23 @@ public class MyRunsRecycleViewAdapter extends RecyclerView.Adapter<MyRunsRecycle
         String photo_url = holder.mItem.photo_url;
         if(!photo_url.isEmpty()) {
 
-            photo_url = photo_url.replace("-64x64","-512x512");
+            Log.d(TAG, "photo_url : " + photo_url);
+            String res="";
+            String final_res = "";
+            Matcher m= Pattern.compile("-\\d+x\\d+").matcher(photo_url);
+            if(m.find()) {
+                res=m.group();
+
+                int width = Integer.valueOf(res.substring(1,3));
+                int height = Integer.valueOf(res.substring(4,6));
+
+                width = width * 8;
+                height = height * 8;
+                final_res = String.format(Locale.US, "-%dx%d", width, height);
+                Log.d(TAG, "res : " + res + " final_res : " + final_res);
+            }
+
+            photo_url = photo_url.replaceFirst("-\\d+x\\d+",final_res);
             Glide.with(holder.mDateView.getContext())
                     .load(photo_url)
                     .centerCrop()

@@ -15,12 +15,9 @@
     <string name="title_activity_marathon_list">MarathonListActivity</string>
     <string name="title_home">Recent</string>
     <string name="title_dashboard">My runs</string>
-    <string name="title_crews">Crews</string>
+    <string name="title_crews">크루</string>
     <string name="title_profile">Profile</string>
     <string name="getting_started_page_text">Sync your run record from your favorite running app with corresponding Marathon!</string>
-    <string name="dummy_marathon_name" translatable="false">Seoul International Marathon - Donga Ilbo blah blah</string>
-    <string name="dummy_location" translatable="false">Seoul Olympics Park Station</string>
-
     <string name="unknown_response">Unexpected onActivityResult response code</string>
     <string name="unknown_sign_in_response">Unknown response from AuthUI sign-in</string>
     <string name="sign_in_cancelled">Sign in cancelled</string>
@@ -47,18 +44,7 @@
     <string name="filter_marathon_events">Filter Marathon Events</string>
 
     <string name="running">Running</string>
-    <string name="dummy_date" translatable="false">2017/03/19 08:00</string>
-    <string name="dummy_days_left" translatable="false">D-100</string>
-    <string name="dummy_elapsed_time" translatable="false">1:05:45</string>
-    <string name="dummy_distance" translatable="false">5.01 KM</string>
-    <string name="dumy_city" translatable="false">Seoul</string>
-    <string name="dummy_speed" translatable="false">8.5 KM/H</string>
     <string name="title_activity_single_event">Event</string>
-    <string name="dummy_app_perioid" translatable="false">Application period : 2016/7/1 - 2016/11/28</string>
-    <string name="dummy_weather" translatable="false">Predicted Weather : 2.9C</string>
-    <string name="dummy_temp" translatable="false">2.9C</string>
-    <string name="dummy_name" translatable="false">John Doe</string>
-
 
     <string name="processing">Processing..</string>
     <string name="fetching_data">Fetching data..</string>
@@ -71,18 +57,14 @@
     <string name="action_settings">Settings</string>
     <string name="action_filter">Filter</string>
     <string name="video">Video</string>
-    <string name="apply_now">Apply now</string>
-
+    <string name="apply_now">접수중</string>
 
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
-    <string name="dummy_button" translatable="false">Dummy Button</string>
-    <string name="dummy_content" translatable="false">DUMMY\nCONTENT</string>
-    <string name="dummy_crew_name" translatable="false">Seoul Running Crew</string>
-    <string name="dumy_crew_insta" translatable="false">"srcseoul"</string>
-    <string name="dummy_crew_description" translatable="false">Private Running Club for everyone</string>
 
+    <string-array  name="filter_array">
 
+        <item>Past Events</item>
+        <item>New Events</item>
 
-
-
+    </string-array>
 </resources>

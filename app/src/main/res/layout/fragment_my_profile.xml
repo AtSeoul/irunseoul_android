@@ -53,7 +53,7 @@
         android:text="@string/stats"
         tools:layout_constraintTop_creator="1"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="102dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="107dp"
+        android:layout_marginBottom="86dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toTopOf="@+id/logout"
@@ -88,8 +88,7 @@
             android:id="@+id/myMarathonNumber"
             android:elevation="@dimen/elevation_text"
             android:text="@string/marathon_number"
-            android:textAppearance="@style/RunTheme.STATS.Title"
-            android:textColor="@android:color/white" />
+            android:textAppearance="@style/RunTheme.STATS.Title"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,8 +97,7 @@
             android:elevation="@dimen/elevation_text"
             android:text="@string/marathon_year"
             android:layout_marginBottom="20dp"
-            android:textAppearance="@style/RunTheme.STATS.Subtitle"
-            android:textColor="@android:color/white" />
+            android:textAppearance="@style/RunTheme.STATS.Subtitle" />
 
         <TextView
             android:id="@+id/textView3"
@@ -111,8 +109,7 @@
             android:gravity="top|center_horizontal"
             android:lines="2"
             android:text="@string/marathon"
-            android:textAppearance="@style/RunTheme.STATS.Subtitle"
-            android:textColor="@android:color/white" />
+            android:textAppearance="@style/RunTheme.STATS.Subtitle" />
 
 
     </FrameLayout>
@@ -144,8 +141,7 @@
             android:elevation="@dimen/elevation_text"
             android:id="@+id/marathonNumber"
             android:text="@string/marathon_number"
-            android:textAppearance="@style/RunTheme.STATS.Title"
-            android:textColor="@android:color/white" />
+            android:textAppearance="@style/RunTheme.STATS.Title"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -156,8 +152,7 @@
             android:gravity="center_horizontal"
             android:elevation="@dimen/elevation_text"
             android:text="@string/marathon_upcoming_year"
-            android:textAppearance="@style/RunTheme.STATS.Subtitle"
-            android:textColor="@android:color/white" />
+            android:textAppearance="@style/RunTheme.STATS.Subtitle" />
 
     </FrameLayout>
 

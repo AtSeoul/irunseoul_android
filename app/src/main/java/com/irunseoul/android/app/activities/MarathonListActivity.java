@@ -27,11 +27,14 @@ import com.google.android.gms.tasks.Task;
 import com.irunseoul.android.app.R;
 
 import com.firebase.ui.auth.IdpResponse;
+import com.irunseoul.android.app.fragments.CrewListFragment;
 import com.irunseoul.android.app.fragments.MyProfileFragment;
 import com.irunseoul.android.app.fragments.MyRunsFragment;
 import com.irunseoul.android.app.fragments.PastEventFragment;
+import com.irunseoul.android.app.model.Crew;
 import com.irunseoul.android.app.model.Event;
 import com.irunseoul.android.app.model.MyRun;
+import com.irunseoul.android.app.utilities.Constants;
 import com.irunseoul.android.app.utilities.PreferencesHelper;
 
 import java.io.File;
@@ -40,7 +43,8 @@ import butterknife.BindView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MarathonListActivity extends AppCompatActivity implements PastEventFragment.OnListFragmentInteractionListener,
-        MyRunsFragment.OnMyRunFragmentInteractionListener, MyProfileFragment.OnMyProfileFragmentInteractionListener{
+        MyRunsFragment.OnMyRunFragmentInteractionListener, MyProfileFragment.OnMyProfileFragmentInteractionListener,
+        CrewListFragment.OnCrewListFragmentInteractionListener {
 
     private static final String TAG = MarathonListActivity.class.getSimpleName();
 
@@ -68,6 +72,10 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
                 case R.id.navigation_dashboard:
                     toolbar.setTitle(getString(R.string.my_marathon_events));
                     fragment = MyRunsFragment.newInstance();
+                    break;
+                case R.id.navigation_crews:
+                    toolbar.setTitle(getString(R.string.title_crews));
+                    fragment = CrewListFragment.newInstance();
                     break;
                 case R.id.navigation_notifications:
                     toolbar.setTitle(getString(R.string.my_profile));
@@ -110,8 +118,15 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
                     toolbar.setTitle(getString(R.string.my_marathon_events));
                     fragment = MyRunsFragment.newInstance();
                     navigation.setSelectedItemId(R.id.navigation_dashboard);
+                    PreferencesHelper.writePref(pref, PreferencesHelper.WHICH_FRAGMENT, 1);
                     break;
+
                 case 3:
+                    toolbar.setTitle(getString(R.string.title_crews));
+                    fragment = CrewListFragment.newInstance();
+                    navigation.setSelectedItemId(R.id.navigation_crews);
+                    break;
+                case 4:
                     toolbar.setTitle(getString(R.string.my_profile));
                     fragment = MyProfileFragment.newInstance();
                     navigation.setSelectedItemId(R.id.navigation_notifications);
@@ -201,6 +216,42 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
     }
 
     @Override
+    public void onCrewListFragmentInteraction(Crew item) {
+
+        Log.d(TAG, "onCrewListFragmentInteraction");
+
+        if(!item.instagram.isEmpty()) {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(Constants.INSTAGRAM_URL_PREFIX + item.instagram));
+            startActivity(i);
+        }
+    }
+
+    @Override
+    public void onCrewWebsiteInteraction(String webURL) {
+
+        Log.d(TAG, "onCrewWebsiteInteraction");
+
+        if(!webURL.isEmpty()) {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(webURL));
+            startActivity(i);
+        }
+    }
+
+    @Override
+    public void onCrewVideoInteraction(String videoURL) {
+
+        Log.d(TAG, "onCrewVideoInteraction");
+
+        if(!videoURL.isEmpty()) {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(videoURL));
+            startActivity(i);
+        }
+    }
+
+    @Override
     public void notifyMarathonCount(int count) {
 
         Log.d(TAG,"notifyMarathonCount : " + count);
@@ -251,35 +302,6 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_marathon_list, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_filter:
-
-                Log.d(TAG, "selected filter");
-                return true;
-
-    /*        case R.id.action_favorite:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                return true;*/
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
     }
 
     private void createInstagramIntent(String mediaPath){

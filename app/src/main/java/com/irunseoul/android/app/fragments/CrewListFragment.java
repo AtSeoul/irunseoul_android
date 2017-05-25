@@ -3,7 +3,6 @@ package com.irunseoul.android.app.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -23,11 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.irunseoul.android.app.R;
-import com.irunseoul.android.app.adapters.PastEventRecyclerViewAdapter;
+import com.irunseoul.android.app.adapters.CrewRecyclerViewAdapter;
+import com.irunseoul.android.app.model.Crew;
 import com.irunseoul.android.app.model.Event;
 import com.irunseoul.android.app.utilities.DateHelper;
 import com.irunseoul.android.app.utilities.NetworkHelper;
-import com.irunseoul.android.app.utilities.PreferencesHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,20 +36,21 @@ import dmax.dialog.SpotsDialog;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnCrewListFragmentInteractionListener}
  * interface.
  */
-public class PastEventFragment extends Fragment {
+public class CrewListFragment extends Fragment {
 
-    private static final String TAG = PastEventFragment.class.getSimpleName();
-    public static final String MARATHON_EVENT_DATABASE = "event";
+    private static final String TAG = CrewListFragment.class.getSimpleName();
+    public static final String CREW_DATABASE = "crews";
+    private static final String CREW_CITY = "seoul";
 
-    private OnListFragmentInteractionListener mListener;
+    private OnCrewListFragmentInteractionListener mListener;
     private DatabaseReference mDatabase;
-    private List<Event> mEventList;
-    private Query mEventsQuery;
+    private List<Crew> mCrewList;
+    private Query mCrewListQuery;
 
-    private RecyclerView pastEventsRecyclerView;
+    private RecyclerView crewListRecyclerView;
     private AlertDialog progressDialog;
     private Context mContext;
 
@@ -59,15 +59,13 @@ public class PastEventFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PastEventFragment() {
+    public CrewListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static PastEventFragment newInstance() {
-        PastEventFragment fragment = new PastEventFragment();
+
+    public static CrewListFragment newInstance() {
+        CrewListFragment fragment = new CrewListFragment();
         Bundle args = new Bundle();
-//        args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -76,31 +74,29 @@ public class PastEventFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference(MARATHON_EVENT_DATABASE);
-        //TODO: Date Format for today 2016/09/15 08:00 - Add Tabs UpComing and Past
-//        final Query mEventsQuery = mDatabase.child("2016").orderByChild("date").limitToLast(20).startAt("2016/09/15 08:00");
-        mEventsQuery = mDatabase.child(DateHelper.getCurrentYear()).orderByChild("date").startAt(DateHelper.getCurrentDate());
+        mDatabase = FirebaseDatabase.getInstance().getReference(CREW_DATABASE);
+        mCrewListQuery = mDatabase.child(CREW_CITY).orderByChild("name");
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_past_event_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_crew_list, container, false);
         progressDialog = new SpotsDialog(getActivity(), getActivity().getResources().getString(R.string.fetching_data));
 
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            pastEventsRecyclerView = (RecyclerView) view;
-            Log.d(TAG, "pastEventsRecyclerView : " + pastEventsRecyclerView);
+            crewListRecyclerView = (RecyclerView) view;
+            Log.d(TAG, "crewListRecyclerView : " + crewListRecyclerView);
 
         }
 
         // Read from the database
-        if(mEventList == null) {
+        if(mCrewList == null) {
             //TODO: Find a way to handle this better
 //            progressDialog.show();
         }
@@ -123,8 +119,8 @@ public class PastEventFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof OnCrewListFragmentInteractionListener) {
+            mListener = (OnCrewListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -156,9 +152,11 @@ public class PastEventFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public interface OnListFragmentInteractionListener {
+    public interface OnCrewListFragmentInteractionListener {
 
-        void onListFragmentInteraction(Event item);
+        void onCrewListFragmentInteraction(Crew item);
+        void onCrewWebsiteInteraction(String webURL);
+        void onCrewVideoInteraction(String videoURL);
     }
 
     private void showToastMessage(String msg) {
@@ -168,23 +166,23 @@ public class PastEventFragment extends Fragment {
 
     private void addFirebaseEventListener() {
 
-        mEventsQuery.addValueEventListener(new ValueEventListener() {
+        mCrewListQuery.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                mEventList = new ArrayList<Event>();
+                mCrewList = new ArrayList<Crew>();
 
                 if(dataSnapshot.exists()) {
                     for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
 
-                        Event event = eventSnapshot.getValue(Event.class);
-                        mEventList.add(event);
-                        Log.d(TAG, "eventSnapshot key(" + eventSnapshot.getKey() + "): " + event.title);
+                        Crew crew = eventSnapshot.getValue(Crew.class);
+                        mCrewList.add(crew);
+                        Log.d(TAG, "eventSnapshot key(" + eventSnapshot.getKey() + "): " + crew.name);
 
                     }
-                    pastEventsRecyclerView.setAdapter(new PastEventRecyclerViewAdapter(mEventList, mListener));
+                    crewListRecyclerView.setAdapter(new CrewRecyclerViewAdapter(mCrewList, mListener));
                     progressDialog.dismiss();
                     Log.d(TAG, "Count is: " + dataSnapshot.getChildrenCount());
 
@@ -224,7 +222,7 @@ public class PastEventFragment extends Fragment {
     }
 
     private void fetchPastMarathonEvents() {
-        mEventsQuery = mDatabase.child(DateHelper.getCurrentYear())
+        mCrewListQuery = mDatabase.child(DateHelper.getCurrentYear())
                 .orderByChild("date")
                 .startAt("2017/03/01 08:00")
                 .endAt(DateHelper.getTodaysDate());
@@ -234,7 +232,7 @@ public class PastEventFragment extends Fragment {
 
     private void fetchNewMarathonEvents() {
 
-        mEventsQuery = mDatabase.child(DateHelper.getCurrentYear()).orderByChild("date").startAt(DateHelper.getCurrentDate());
+        mCrewListQuery = mDatabase.child(DateHelper.getCurrentYear()).orderByChild("date").startAt(DateHelper.getCurrentDate());
         addFirebaseEventListener();
 
     }

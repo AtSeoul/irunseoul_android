@@ -18,7 +18,7 @@ public class DateHelper {
 
         DateTime now = DateTime.now();
 
-        DateTime twoDaysBefore = now.minusDays(2);
+        DateTime twoDaysBefore = now.minusDays(4);
         Log.d("DateHelper", " date  :" + twoDaysBefore + " year; " + twoDaysBefore.year().getAsShortText() +
                 " month : " + twoDaysBefore.monthOfYear().getAsString()+ " day : " + twoDaysBefore.dayOfMonth().getAsText());
 
@@ -28,6 +28,19 @@ public class DateHelper {
         Log.d("DateHelper", " fmt : " + fmt.print(twoDaysBefore));
 
         return fmt.print(twoDaysBefore);
+
+    }
+
+    public static String getTodaysDate() {
+
+        DateTime now = DateTime.now();
+
+        //2017/03/15 08:00
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm");
+
+        Log.d("DateHelper", " fmt : " + fmt.print(now));
+
+        return fmt.print(now);
 
     }
 

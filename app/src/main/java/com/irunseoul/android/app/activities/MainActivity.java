@@ -164,9 +164,9 @@ public class MainActivity extends AppCompatActivity {
     @StyleRes
     private int getSelectedTheme() {
 
-            return AuthUI.getDefaultTheme();
+//        return AuthUI.getDefaultTheme();
 
-//        return R.style.PurpleTheme
+        return R.style.DarkTheme;
     }
 
     @MainThread

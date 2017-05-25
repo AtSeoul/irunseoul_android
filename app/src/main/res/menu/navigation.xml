@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_view_list_black_48dp"
-        android:title="@string/title_home" />
+        android:title="@string/title_home"
+        app:showAsAction="ifRoom"
+        android:enabled="true"/>
 
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_directions_run_black_48dp"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_dashboard"
+        app:showAsAction="ifRoom"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/navigation_crews"
+        android:icon="@drawable/ic_group_black_48dp"
+        android:title="@string/title_crews"
+        app:showAsAction="ifRoom"
+        android:enabled="true"/>
 
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_person_black_48dp"
-        android:title="@string/title_profile" />
+        android:title="@string/title_profile"
+        app:showAsAction="ifRoom"
+        android:enabled="true"/>
 
 </menu>

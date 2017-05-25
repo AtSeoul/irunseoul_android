@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/text_margin_list_item"
+    android:background="@color/text_primary"
+    android:layout_height="wrap_content"
+    android:alpha="0.8"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/crew_icon_size"
+                android:layout_height="@dimen/crew_icon_size"
+                android:id="@+id/runCrewIcon"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_clear_day"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/text_margin"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/icon_margin"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/RunTheme.Crew.Title"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/text_margin_list_item"
+                    android:id="@+id/crewName"
+                    android:text="@string/dummy_crew_name"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/icon_margin"
+                    android:textAppearance="@style/RunTheme.Crew.Subtitle"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/text_margin_list_item"
+                    android:id="@+id/crewDescription"
+                    android:text="@string/dummy_crew_description"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:layout_marginBottom="@dimen/icon_margin"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:tint="@color/white"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_instagram_white_36dp"/>
+
+                <TextView
+                    android:id="@+id/instaId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/icon_margin"
+                    android:textAppearance="@style/RunTheme.Subtitle"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/icon_size"
+                    android:text="@string/dumy_crew_insta"/>
+
+                <ImageView
+                    android:id="@+id/youtubeVideo"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:tint="@color/white"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_youtube_play_white_36dp"/>
+
+                <TextView
+                    android:id="@+id/youtubeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/icon_margin"
+                    android:textAppearance="@style/RunTheme.Subtitle"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/icon_size"
+                    android:text="@string/video"/>
+
+
+                <ImageView
+                    android:id="@+id/websiteImage"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:tint="@color/white"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_web_white_36dp"/>
+
+                <TextView
+                    android:id="@+id/websiteText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/icon_margin"
+                    android:textAppearance="@style/RunTheme.Subtitle"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/icon_size"
+                    android:text="@string/website"/>
+
+
+        </LinearLayout>
+
+
+</LinearLayout>

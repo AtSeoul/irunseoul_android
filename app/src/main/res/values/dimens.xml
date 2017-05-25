@@ -13,6 +13,7 @@
     <dimen name="svg_icon_size">36dp</dimen>
     <dimen name="icon_margin">8dp</dimen>
     <dimen name="text_margin_list_item">4dp</dimen>
+    <dimen name="crew_icon_size">80dp</dimen>
 
     <dimen name="linearlayout_list_margin">20dp</dimen>
     <dimen name="recycleview_margintop">56dp</dimen>

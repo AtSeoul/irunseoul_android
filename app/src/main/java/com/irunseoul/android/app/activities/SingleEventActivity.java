@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -79,7 +80,8 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 
     private static final String TAG = SingleEventActivity.class.getSimpleName();
     private static final int RQ_LOGIN = 109;
-    private static final int ITEMS_PER_PAGE = 20;
+    private static final int ITEMS_PER_PAGE = 70;
+    private static final int DISTANCE_DIFFERENCE = 1000;
 
     private static final double SEOUL_LAT = 37.5559341;
     private static final double SEOUL_LNG  = 126.9759789;
@@ -317,6 +319,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
             Date finishDate = new Date();
             Calendar calendar = Calendar.getInstance();
             Calendar finishCalendar = Calendar.getInstance();
+
             try {
                 convertedDate = dateFormat.parse(dateString);
                 finishDate = dateFormat.parse(dateString);
@@ -335,30 +338,49 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 //                    .before(Time.seconds(calendar.get(Calendar.SECOND)))
                     .after(Time.seconds(calendar.get(Calendar.SECOND)))
 //                    .inPage(1)
-//                    .perPage(ITEMS_PER_PAGE)
+                    .perPage(ITEMS_PER_PAGE)
                     .execute();
+            if(activities != null) {
+                Log.d(TAG, "strava_activities count : " + activities.size());
+            }
             for (com.sweetzpot.stravazpot.activity.model.Activity activity : activities) {
-                if (activity.getStartDateLocal().before(finishCalendar.getTime()) && activity.getStartDateLocal().after(calendar.getTime())) {
 
-                    wrapper.activity = activity;
-                    PhotoAPI photoAPI = new PhotoAPI(stravaConfig);
-                    List<Photo> photos = photoAPI.listAcivityPhotos(activity.getID())
-                            .execute();
-                    if(photos.size() > 0) {
-                        for(Photo photo: photos) {
-                            Log.d(TAG, "photos : " +photo.getUrls().toString());
+
+                float[] distanceResult = new float[1];
+                if(activity.getStartCoordinates() != null ) {
+                    Location.distanceBetween(activity.getStartCoordinates().getLatitude(),
+                            activity.getStartCoordinates().getLongitude(),
+                            Float.valueOf(mLat),
+                            Float.valueOf(mLng),
+                            distanceResult
+                    );
+                }
+                if (activity.getStartDateLocal().before(finishCalendar.getTime()) &&
+                        activity.getStartDateLocal().after(calendar.getTime())) {
+
+                    if(distanceResult != null && distanceResult[0] < DISTANCE_DIFFERENCE) {
+
+
+                        wrapper.activity = activity;
+                        PhotoAPI photoAPI = new PhotoAPI(stravaConfig);
+                        List<Photo> photos = photoAPI.listAcivityPhotos(activity.getID())
+                                .execute();
+                        if (photos.size() > 0) {
+                            for (Photo photo : photos) {
+                                Log.d(TAG, "photos : " + photo.getUrls().toString());
+                            }
+                            wrapper.photo_url = photos.get(0).getUrls().get("0");
+
                         }
-                        wrapper.photo_url  = photos.get(0).getUrls().get("0");
+
+                        Log.d(TAG, "resultActivity : start_date " + activity.getStartDate() + "local_date : " + activity.getStartDateLocal() +
+                                " timezone" + activity.getTimezone() + " " + activity.getDistance() + " distance_diff : " + distanceResult[0]);
 
                     }
-
-                    Log.d(TAG,  "resultActivity : start_date " + activity.getStartDate() + "local_date : " + activity.getStartDateLocal() +
-                            " timezone" + activity.getTimezone() + " "  + activity.getDistance());
-
                 }
                 Log.d(TAG,  "start_date " + activity.getStartDate() + "local_date : " + activity.getStartDateLocal() +
                         " timezone" + activity.getTimezone() + " "  + activity.getDistance());
-                Log.d(TAG, "photos: " + activity.getPhotos() + " avgSpeed : " + activity.getAverageSpeed().getMetersPerSecond() + " type : "  + activity.getType());
+                Log.d(TAG, "avgSpeed : " + activity.getAverageSpeed().getMetersPerSecond() + " type : "  + activity.getType());
 
             }
 
@@ -431,7 +453,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
         final com.sweetzpot.stravazpot.activity.model.Activity activity = result.activity;
         final String photo_url = result.photo_url;
 
-        mExistingRunQuery = mDatabase.child("runs").orderByChild("run_id").equalTo(String.valueOf(activity.getID()));
+        mExistingRunQuery = mDatabase.child("user-runs").child(userId).orderByChild("run_id").equalTo(String.valueOf(activity.getID()));
 
         mExistingRunQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -8,7 +8,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="230dp"
         android:elevation="10dp"
         >
 
@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/RunTheme.Subtitle"
+                android:textAppearance="@style/RunTheme.MyRun.Subtitle"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/text_margin_list_item"
                 android:text="@string/running"/>
@@ -42,7 +42,7 @@
 
             <TextView
                 android:id="@+id/eventDate"
-                android:textAppearance="@style/RunTheme.Subtitle"
+                android:textAppearance="@style/RunTheme.MyRun.Subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
@@ -62,7 +62,7 @@
             android:padding="@dimen/title_padding"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textAppearance="@style/RunTheme.Title"
+            android:textAppearance="@style/RunTheme.MyRun.Title"
             android:layout_gravity="center"/>
 
         <LinearLayout
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/text_margin_list_item"
-                    android:textAppearance="@style/RunTheme.Subtitle"
+                    android:textAppearance="@style/RunTheme.MyRun.Stats"
                     android:layout_gravity="center_vertical"
                     android:text="@string/dummy_distance"/>
 
@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/text_margin_list_item"
-                    android:textAppearance="@style/RunTheme.Subtitle"
+                    android:textAppearance="@style/RunTheme.MyRun.Stats"
                     android:layout_gravity="center_vertical"
                     android:text="@string/dummy_speed"/>
 

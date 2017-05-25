@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.irunseoul.android.app.fragments.PastEventFragment.OnListFragmentInteractionListener;
@@ -75,7 +76,12 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
 
         int diffDays = DateHelper.getDaysDiff(holder.mItem.date);
 
-        holder.mdaysLeft.setText(String.format(Locale.US,res.getString(R.string.d_day), diffDays));
+        if(diffDays < 0) {
+            diffDays = -1 * diffDays;
+            holder.mdaysLeft.setText(String.format(Locale.US, res.getString(R.string.d_days_ago), diffDays));
+        } else {
+            holder.mdaysLeft.setText(String.format(Locale.US, res.getString(R.string.d_day), diffDays));
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,9 +99,9 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
 
             if(result.length > 1) {
                 if (DateHelper.isApplicationPeriod(result[1])) {
-                    holder.applicationImage.setVisibility(View.VISIBLE);
+                    holder.mApplicationStatus.setVisibility(View.VISIBLE);
                 } else {
-                    holder.applicationImage.setVisibility(View.INVISIBLE);
+                    holder.mApplicationStatus.setVisibility(View.GONE);
                 }
             }
         }
@@ -115,6 +121,7 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
         public final ImageView mTempIcon;
         public final TextView mdaysLeft;
         public final ImageView applicationImage;
+        public final LinearLayout mApplicationStatus;
         public Event mItem;
 
         public ViewHolder(View view) {
@@ -126,6 +133,7 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
             mTempIcon = (ImageView) view.findViewById(R.id.runTempIcon);
             mdaysLeft = (TextView) view.findViewById(R.id.daysLeft);
             applicationImage = (ImageView) view.findViewById(R.id.applicationImage);
+            mApplicationStatus = (LinearLayout) view.findViewById(R.id.applicationStatus);
         }
 
         @Override
