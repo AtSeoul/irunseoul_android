@@ -3,7 +3,6 @@ package com.irunseoul.android.app.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +26,6 @@ import com.irunseoul.android.app.adapters.PastEventRecyclerViewAdapter;
 import com.irunseoul.android.app.model.Event;
 import com.irunseoul.android.app.utilities.DateHelper;
 import com.irunseoul.android.app.utilities.NetworkHelper;
-import com.irunseoul.android.app.utilities.PreferencesHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +42,10 @@ public class PastEventFragment extends Fragment {
 
     private static final String TAG = PastEventFragment.class.getSimpleName();
     public static final String MARATHON_EVENT_DATABASE = "event";
+    public static final String INTL_MARATHON_EVENT_DATABASE = "intl-event";
+    private static final String PAST_2017_START_DATE = "2017/03/18 08:00";
+
+    private static final String ARG_TAB_INDEX = "arg_tab_index";
 
     private OnListFragmentInteractionListener mListener;
     private DatabaseReference mDatabase;
@@ -53,21 +55,17 @@ public class PastEventFragment extends Fragment {
     private RecyclerView pastEventsRecyclerView;
     private AlertDialog progressDialog;
     private Context mContext;
+    private int mTabIndex = 0;
 
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     public PastEventFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static PastEventFragment newInstance() {
+    public static PastEventFragment newInstance(int tabIndex) {
         PastEventFragment fragment = new PastEventFragment();
         Bundle args = new Bundle();
-//        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(ARG_TAB_INDEX, tabIndex);
         fragment.setArguments(args);
         return fragment;
     }
@@ -77,11 +75,36 @@ public class PastEventFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
-
         mDatabase = FirebaseDatabase.getInstance().getReference(MARATHON_EVENT_DATABASE);
-        //TODO: Date Format for today 2016/09/15 08:00 - Add Tabs UpComing and Past
-//        final Query mEventsQuery = mDatabase.child("2016").orderByChild("date").limitToLast(20).startAt("2016/09/15 08:00");
-        mEventsQuery = mDatabase.child(DateHelper.getCurrentYear()).orderByChild("date").startAt(DateHelper.getCurrentDate());
+
+        if (getArguments() != null) {
+            mTabIndex = getArguments().getInt(ARG_TAB_INDEX);
+
+            if (mTabIndex == 0) {
+                mEventsQuery = mDatabase
+                        .child(DateHelper.getCurrentYear())
+                        .orderByChild("date").startAt(DateHelper.getCurrentDate());
+
+            } else if(mTabIndex == 1) {
+
+                mEventsQuery = mDatabase.child(DateHelper.getCurrentYear())
+                        .orderByChild("date")
+                        .startAt("2018/01/01 08:00")
+                        .endAt(DateHelper.getTodaysDate());
+
+            } else if (mTabIndex == 2) {
+
+                mEventsQuery = mDatabase
+                        .child("2017")
+                        .orderByChild("date").startAt(PAST_2017_START_DATE);
+            } else if (mTabIndex == 3) {
+                mDatabase = FirebaseDatabase.getInstance().getReference(INTL_MARATHON_EVENT_DATABASE);
+                mEventsQuery = mDatabase
+                        .child(DateHelper.getCurrentYear())
+                        .orderByChild("date");
+            }
+        }
+
 
     }
 
@@ -146,9 +169,9 @@ public class PastEventFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if(id == R.id.action_filter){
+        if(id == R.id.action_refresh){
 
-            createFilterDialog();
+//            createFilterDialog();
 
             return true;
         }
@@ -212,7 +235,7 @@ public class PastEventFragment extends Fragment {
 
                         switch (which) {
                             case 0:
-                                fetchPastMarathonEvents();
+                                fetchUpdatedMarathonEvents();
                                 break;
                             default:
                                 fetchNewMarathonEvents();
@@ -223,11 +246,32 @@ public class PastEventFragment extends Fragment {
         builder.create().show();
     }
 
-    private void fetchPastMarathonEvents() {
-        mEventsQuery = mDatabase.child(DateHelper.getCurrentYear())
-                .orderByChild("date")
-                .startAt("2017/03/01 08:00")
-                .endAt(DateHelper.getTodaysDate());
+    private void fetchUpdatedMarathonEvents() {
+
+        if(mTabIndex == 0) {
+            mDatabase = FirebaseDatabase.getInstance().getReference(MARATHON_EVENT_DATABASE);
+            mEventsQuery = mDatabase
+                    .child(DateHelper.getCurrentYear())
+                    .orderByChild("date").startAt(DateHelper.getCurrentDate());
+        } else if (mTabIndex == 1) {
+            mDatabase = FirebaseDatabase.getInstance().getReference(MARATHON_EVENT_DATABASE);
+            mEventsQuery = mDatabase.child(DateHelper.getCurrentYear())
+                    .orderByChild("date")
+                    .startAt("2018/01/01 08:00")
+                    .endAt(DateHelper.getTodaysDate());
+        } else if (mTabIndex == 2) {
+            mDatabase = FirebaseDatabase.getInstance().getReference(MARATHON_EVENT_DATABASE);
+            mEventsQuery = mDatabase.child("2017")
+                    .orderByChild("date")
+                    .startAt("2017/03/18 08:00")
+                    .endAt(DateHelper.getTodaysDate());
+        } else if (mTabIndex == 3) {
+
+            mDatabase = FirebaseDatabase.getInstance().getReference(INTL_MARATHON_EVENT_DATABASE);
+            mEventsQuery = mDatabase
+                    .child(DateHelper.getCurrentYear())
+                    .orderByChild("date");
+        }
 
         addFirebaseEventListener();
     }

@@ -11,7 +11,7 @@
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="156dp"
-        card_view:cardBackgroundColor="@color/text_primary"
+        card_view:cardBackgroundColor="@android:color/black"
         android:alpha="0.8"
         android:elevation="10dp"
         >
@@ -24,9 +24,10 @@
             <ImageView
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
-                android:layout_marginStart="@dimen/icon_margin"
+                android:layout_marginStart="@dimen/text_margin"
                 android:id="@+id/runTempIcon"
-                android:src="@drawable/ic_clear_day"/>
+                android:tint="@color/white"
+                android:src="@drawable/ic_directions_run_black_48dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,9 +42,11 @@
             <TextView
                 android:id="@+id/daysLeft"
                 android:textAppearance="@style/RunTheme.Days.Title"
-                android:layout_width="194dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
+                android:paddingEnd="@dimen/text_margin"
+                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:text="@string/dummy_days_left"/>
 
@@ -54,16 +57,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:text="@string/dummy_marathon_name"
-            android:padding="@dimen/title_padding"
             android:ellipsize="end"
-            android:gravity="center_horizontal"
+            android:gravity="start"
             android:textAppearance="@style/RunTheme.Title"
-            android:layout_gravity="center"/>
+            android:layout_gravity="left|center_vertical"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_gravity="bottom"
-            android:gravity="center_horizontal"
+            android:gravity="start"
             android:layout_marginStart="@dimen/text_margin"
             android:layout_marginEnd="@dimen/text_margin"
             android:layout_marginBottom="@dimen/icon_margin"
@@ -73,7 +75,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:layout_weight="0.7">
                 <ImageView
                     android:layout_width="@dimen/icon_size"
@@ -86,7 +88,7 @@
                     android:id="@+id/runCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/text_margin_list_item"
+                    android:layout_marginStart="@dimen/text_margin_list_item"
                     android:textAppearance="@style/RunTheme.Subtitle"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/icon_size"

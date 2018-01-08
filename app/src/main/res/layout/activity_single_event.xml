@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root_view"
+    android:background="@android:color/transparent"
     tools:context="com.irunseoul.android.app.activities.SingleEventActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -25,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:alpha="0.4"
+        android:alpha="0.3"
         android:src="@drawable/landing_page_back"/>
 
     <include layout="@layout/content_single_event" />

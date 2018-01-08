@@ -34,13 +34,14 @@
     <string name="marathon_number">2</string>
     <string name="marathon_year">in 2017</string>
     <string name="marathon_upcoming_year">Upcoming Marathons in 2017</string>
-    <string name="marathon_events_2017">Marathon Events 2017</string>
+    <string name="marathon_events_2017">마라톤 대회</string>
     <string name="my_marathon_events">My Marathon events</string>
     <string name="my_profile">My Profile</string>
     <string name="network_not_available">You are not connected to Internet!</string>
     <string name="sync_your_first_run">Sync your first run!</string>
     <string name="d_day">D-%d</string>
     <string name="d_days_ago">%d days ago</string>
+    <string name="today">Today</string>
     <string name="filter_marathon_events">Filter Marathon Events</string>
 
     <string name="running">Running</string>
@@ -56,6 +57,7 @@
     <string name="large_text"> large text </string>
     <string name="action_settings">Settings</string>
     <string name="action_filter">Filter</string>
+    <string name="action_search">Search</string>
     <string name="video">Video</string>
     <string name="apply_now">접수중</string>
 

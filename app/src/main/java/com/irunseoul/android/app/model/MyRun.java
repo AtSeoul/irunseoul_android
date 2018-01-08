@@ -54,6 +54,7 @@ public class MyRun {
     public String run_name;
     public String distance;
     public String moving_time;
+    public String moving_time_min;
     public String start_date;
     public String start_date_local;
     public String average_speed;
@@ -90,6 +91,7 @@ public class MyRun {
         this.run_name = activity.getName();
         this.distance = getDistancKM(activity.getDistance().getMeters());
         this.moving_time = getFormattedMovingTime(activity.getMovingTime());
+        this.moving_time_min = getFormattedMovingTimeMin(activity.getMovingTime());
         this.type = activity.getType().toString();
         this.photo_url = photo_url;
 
@@ -117,6 +119,7 @@ public class MyRun {
         result.put("run_name", run_name);
         result.put("distance", distance);
         result.put("moving_time", moving_time);
+        result.put("moving_time_min", moving_time_min);
         result.put("start_date", start_date);
         result.put("start_date_local", start_date_local);
         result.put("average_speed", average_speed);
@@ -148,6 +151,15 @@ public class MyRun {
         int secs = totalSecs % 60;
 
         movingTime = String.format("%02d:%02d:%02d", hours, minutes, secs);
+
+        return movingTime;
+    }
+
+    private String getFormattedMovingTimeMin(Time time) {
+
+        String movingTime = "";
+        int minutes = time.getSeconds() / 60;
+        movingTime = String.format("%02d",  minutes);
 
         return movingTime;
     }

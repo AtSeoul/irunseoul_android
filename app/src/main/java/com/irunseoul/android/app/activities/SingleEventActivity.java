@@ -80,7 +80,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 
     private static final String TAG = SingleEventActivity.class.getSimpleName();
     private static final int RQ_LOGIN = 109;
-    private static final int ITEMS_PER_PAGE = 70;
+    private static final int ITEMS_PER_PAGE = 80;
     private static final int DISTANCE_DIFFERENCE = 1000;
 
     private static final double SEOUL_LAT = 37.5559341;
@@ -358,7 +358,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                 if (activity.getStartDateLocal().before(finishCalendar.getTime()) &&
                         activity.getStartDateLocal().after(calendar.getTime())) {
 
-                    if(distanceResult != null && distanceResult[0] < DISTANCE_DIFFERENCE) {
+                    if(/*distanceResult != null && distanceResult[0] < DISTANCE_DIFFERENCE*/ true) {
 
 
                         wrapper.activity = activity;
@@ -472,8 +472,9 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                     // Create new post at /user-runs/$userid/$runid and at
                     // /runs/$runid simultaneously
                     String key = mDatabase.child("runs").push().getKey();
+                    String run_map = "strava";
                     MyRun run = new MyRun(userId, mCity, mDate, mHost, mTitle, mWeather, mWebsite, mLat,
-                            mLng, mLocation, mMapUrl, mTemperature, "strava", activity, photo_url);
+                            mLng, mLocation, mMapUrl, mTemperature, run_map, activity, photo_url);
                     Map<String, Object> postValues = run.toMap();
 
                     Map<String, Object> childUpdates = new HashMap<>();

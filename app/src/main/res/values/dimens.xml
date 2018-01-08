@@ -12,7 +12,7 @@
     <dimen name="icon_size">24dp</dimen>
     <dimen name="svg_icon_size">36dp</dimen>
     <dimen name="icon_margin">8dp</dimen>
-    <dimen name="text_margin_list_item">4dp</dimen>
+    <dimen name="text_margin_list_item">8dp</dimen>
     <dimen name="crew_icon_size">80dp</dimen>
 
     <dimen name="linearlayout_list_margin">20dp</dimen>
@@ -22,6 +22,8 @@
     <dimen name="user_photo">68dp</dimen>
     <dimen name="my_run_button_width">200dp</dimen>
     <dimen name="my_run_button_height">48dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="app_bar_top">56dp</dimen>
 
 
 </resources>

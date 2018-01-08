@@ -54,6 +54,7 @@ public class MyRunsRecycleViewAdapter extends RecyclerView.Adapter<MyRunsRecycle
         holder.mRunElapsedTime.setText(holder.mItem.moving_time);
         holder.mRunPace.setText(String.format(Locale.US, "%s KM/H",holder.mItem.average_speed));
 
+/*
         String photo_url = holder.mItem.photo_url;
         if(!photo_url.isEmpty()) {
 
@@ -81,13 +82,12 @@ public class MyRunsRecycleViewAdapter extends RecyclerView.Adapter<MyRunsRecycle
                     .crossFade()
                     .into(holder.mEventImage);
         }
+*/
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
@@ -105,7 +105,6 @@ public class MyRunsRecycleViewAdapter extends RecyclerView.Adapter<MyRunsRecycle
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mTitleView;
-        public final ImageView mEventImage;
         public final TextView mDateView;
         public final TextView mRunDistance;
         public final TextView mRunPace;
@@ -116,7 +115,6 @@ public class MyRunsRecycleViewAdapter extends RecyclerView.Adapter<MyRunsRecycle
             super(view);
             mView = view;
             mTitleView = (TextView) view.findViewById(R.id.eventTitle);
-            mEventImage = (ImageView) view.findViewById(R.id.runImage);
             mDateView = (TextView) view.findViewById(R.id.eventDate);
             mRunDistance = (TextView) view.findViewById(R.id.runDistance);
             mRunPace = (TextView) view.findViewById(R.id.runPace);

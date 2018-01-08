@@ -9,6 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -94,6 +97,8 @@ public class MyProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mEventsQuery = mDatabase.child("user-runs").child(getUid()).orderByChild("date");
@@ -217,5 +222,24 @@ public class MyProfileFragment extends Fragment {
         return FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_profile, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if(id == R.id.action_settings){
+
+            //START Setting activity
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }

@@ -12,11 +12,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/RunTheme">
-
         <activity
             android:name=".activities.SplashScreenActivity"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +27,7 @@
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/RunTheme.NoActionBar">
-        </activity>
+            android:theme="@style/RunTheme.NoActionBar"></activity>
         <activity
             android:name=".activities.MarathonListActivity"
             android:label="@string/app_name"
@@ -67,25 +65,37 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.irunseoul.android.app.activities.MarathonListActivity" />
         </activity>
-        <service
-            android:name=".notifications.RunFirebaseMessagingService">
+
+        <service android:name=".notifications.RunFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_noti_icon_temp" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-
+        <activity
+            android:name=".MarathonTabActivity"
+            android:label="@string/title_activity_marathon_tab"
+            android:parentActivityName=".activities.MarathonListActivity"
+            android:theme="@style/RunTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.irunseoul.android.app.activities.MarathonListActivity" />
+        </activity>
     </application>
 
 </manifest>

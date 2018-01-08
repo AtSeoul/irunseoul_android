@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.irunseoul.android.app.activities.SingleEventActivity"
-    android:background="@color/text_primary"
+    android:background="@color/black"
     android:alpha="0.8"
     tools:showIn="@layout/activity_single_event">
 
@@ -55,7 +55,7 @@
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="16dp"
         app:layout_constraintLeft_toRightOf="@+id/eventDate"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="11dp"
         app:layout_constraintVertical_bias="0.758">
 
     </ImageView>
@@ -70,7 +70,8 @@
       android:id="@+id/eventDate"
       tools:layout_constraintLeft_creator="1"
       app:layout_constraintLeft_toLeftOf="@+id/event_title"
-      android:layout_marginLeft="16dp" />
+      android:layout_marginLeft="16dp"
+      android:layout_marginStart="16dp" />
 
     <fragment
         android:id="@+id/map"
@@ -95,12 +96,11 @@
         android:textAppearance="@style/RunTheme.Secondary.Title"
         android:text="@string/dummy_app_perioid"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="47dp"
         app:layout_constraintTop_toBottomOf="@+id/map"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginStart="16dp" />
 
 
     <TextView
@@ -111,7 +111,7 @@
         android:textAppearance="@style/RunTheme.Secondary.Title"
         tools:layout_constraintTop_creator="1"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@+id/appPeriod"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -128,11 +128,16 @@
         tools:layout_constraintRight_creator="1"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:orientation="vertical"
         tools:layout_constraintLeft_creator="1">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/eventWebsite"
-            android:layout_width="130dp"
+            android:layout_width="140dp"
             android:layout_marginEnd="@dimen/text_margin"
             android:layout_height="36dp"
             android:paddingStart="@dimen/text_margin"
@@ -143,18 +148,8 @@
             android:paddingEnd="@dimen/text_margin"
             android:drawableStart="@drawable/ic_edit_black_36dp" />
 
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:drawableStart="@drawable/ic_contact_phone_black_36dp"-->
-            <!--android:id="@+id/eventPhone"-->
-            <!--android:textSize="12sp"-->
-            <!--android:layout_marginEnd="@dimen/text_margin"-->
-            <!--android:paddingStart="@dimen/text_margin"-->
-            <!--android:paddingEnd="@dimen/text_margin"-->
-            <!--android:text="@string/contact_number"-->
-            <!--android:layout_height="wrap_content" />-->
         <Button
-            android:layout_width="130dp"
+            android:layout_width="140dp"
             android:drawableStart="@drawable/ic_location_on_black_24"
             android:text="@string/daum_map"
             android:id="@+id/eventMapUrl"
@@ -178,11 +173,11 @@
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintHorizontal_bias="0.502" />
-
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

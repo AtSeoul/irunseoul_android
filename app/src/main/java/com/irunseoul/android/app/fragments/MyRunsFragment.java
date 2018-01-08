@@ -107,6 +107,64 @@ public class MyRunsFragment extends Fragment {
             progressDialog.dismiss();
             return view;
         }
+        addFirebaseEventListener();
+        return view;
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnMyRunFragmentInteractionListener) {
+            mListener = (OnMyRunFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_marathon_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if(id == R.id.action_refresh){
+            addFirebaseEventListener();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public interface OnMyRunFragmentInteractionListener {
+
+        void onListFragmentInteraction(MyRun item);
+        void onClickSyncRunButton();
+        void notifyMyMarathonCount(int count);
+    }
+
+    public String getUid() {
+
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    private void showToastMessage(String msg) {
+
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
+    }
+
+    private void addFirebaseEventListener() {
+
         // Read from the database
         mEventsQuery.addValueEventListener(new ValueEventListener() {
             @Override
@@ -138,59 +196,5 @@ public class MyRunsFragment extends Fragment {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-        return view;
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnMyRunFragmentInteractionListener) {
-            mListener = (OnMyRunFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_single_run, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if(id == R.id.action_settings){
-
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public interface OnMyRunFragmentInteractionListener {
-
-        void onListFragmentInteraction(MyRun item);
-        void onClickSyncRunButton();
-        void notifyMyMarathonCount(int count);
-    }
-
-    public String getUid() {
-
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
-    }
-
-    private void showToastMessage(String msg) {
-
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
     }
 }

@@ -50,6 +50,12 @@ public class DateHelper {
         return now.year().getAsShortText();
     }
 
+    public static String getPreviousYear() {
+
+        DateTime now = DateTime.now();
+        return now.year().getAsShortText();
+    }
+
     public static int getDaysDiff(String event_date) {
 
         int diff = 0;

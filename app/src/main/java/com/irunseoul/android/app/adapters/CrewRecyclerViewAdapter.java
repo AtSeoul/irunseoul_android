@@ -52,7 +52,7 @@ public class CrewRecyclerViewAdapter extends RecyclerView.Adapter<CrewRecyclerVi
         holder.mItem = mCrews.get(position);
         holder.mNameView.setText(holder.mItem.name);
         holder.mDescriptionView.setText(holder.mItem.description);
-        holder.mInstaText.setText(holder.mItem.instagram);
+//        holder.mInstaText.setText(holder.mItem.instagram);
         Resources res = holder.mNameView.getContext().getResources();
 
         if(!holder.mItem.logo_url.isEmpty()) {

@@ -79,6 +79,8 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
         if(diffDays < 0) {
             diffDays = -1 * diffDays;
             holder.mdaysLeft.setText(String.format(Locale.US, res.getString(R.string.d_days_ago), diffDays));
+        } else if(diffDays == 0) {
+            holder.mdaysLeft.setText(res.getString(R.string.today));
         } else {
             holder.mdaysLeft.setText(String.format(Locale.US, res.getString(R.string.d_day), diffDays));
         }

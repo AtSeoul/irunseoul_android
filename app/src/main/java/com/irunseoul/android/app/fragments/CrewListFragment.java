@@ -74,7 +74,7 @@ public class CrewListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
 
         mDatabase = FirebaseDatabase.getInstance().getReference(CREW_DATABASE);
         mCrewListQuery = mDatabase.child(CREW_CITY).orderByChild("name");
@@ -142,9 +142,9 @@ public class CrewListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if(id == R.id.action_filter){
+        if(id == R.id.action_refresh){
 
-            createFilterDialog();
+            addFirebaseEventListener();
 
             return true;
         }
@@ -199,41 +199,6 @@ public class CrewListFragment extends Fragment {
         });
     }
 
-    private void createFilterDialog() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.filter_marathon_events)
-                .setItems(R.array.filter_array, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
 
-                        Log.d(TAG, "which : " + which);
-
-                        switch (which) {
-                            case 0:
-                                fetchPastMarathonEvents();
-                                break;
-                            default:
-                                fetchNewMarathonEvents();
-                        }
-                    }
-                });
-
-        builder.create().show();
-    }
-
-    private void fetchPastMarathonEvents() {
-        mCrewListQuery = mDatabase.child(DateHelper.getCurrentYear())
-                .orderByChild("date")
-                .startAt("2017/03/01 08:00")
-                .endAt(DateHelper.getTodaysDate());
-
-        addFirebaseEventListener();
-    }
-
-    private void fetchNewMarathonEvents() {
-
-        mCrewListQuery = mDatabase.child(DateHelper.getCurrentYear()).orderByChild("date").startAt(DateHelper.getCurrentDate());
-        addFirebaseEventListener();
-
-    }
 }

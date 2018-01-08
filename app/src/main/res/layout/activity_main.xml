@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root"
+    android:background="@color/black"
     android:fitsSystemWindows="true"
     tools:context="com.irunseoul.android.app.activities.MainActivity">
 
@@ -26,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:alpha="0.5"
         android:src="@drawable/list_bg"/>
 
     <include layout="@layout/content_main" />

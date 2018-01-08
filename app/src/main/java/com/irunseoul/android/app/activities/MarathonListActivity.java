@@ -10,9 +10,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.irunseoul.android.app.R;
 
 import com.firebase.ui.auth.IdpResponse;
 import com.irunseoul.android.app.fragments.CrewListFragment;
+import com.irunseoul.android.app.fragments.EventTabFragment;
 import com.irunseoul.android.app.fragments.MyProfileFragment;
 import com.irunseoul.android.app.fragments.MyRunsFragment;
 import com.irunseoul.android.app.fragments.PastEventFragment;
@@ -44,7 +47,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MarathonListActivity extends AppCompatActivity implements PastEventFragment.OnListFragmentInteractionListener,
         MyRunsFragment.OnMyRunFragmentInteractionListener, MyProfileFragment.OnMyProfileFragmentInteractionListener,
-        CrewListFragment.OnCrewListFragmentInteractionListener {
+        CrewListFragment.OnCrewListFragmentInteractionListener, EventTabFragment.OnMainFragmentInteractionListener {
 
     private static final String TAG = MarathonListActivity.class.getSimpleName();
 
@@ -67,7 +70,7 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
                 case R.id.navigation_home:
                     Log.d(TAG, "navigation_home");
                     toolbar.setTitle(getString(R.string.marathon_events_2017));
-                    fragment = PastEventFragment.newInstance();
+                    fragment = EventTabFragment.newInstance();
                     break;
                 case R.id.navigation_dashboard:
                     toolbar.setTitle(getString(R.string.my_marathon_events));
@@ -110,7 +113,8 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
 
                 case 1 :
                     toolbar.setTitle(getString(R.string.marathon_events_2017));
-                    fragment = PastEventFragment.newInstance();
+//                    fragment = PastEventFragment.newInstance();
+                    fragment = EventTabFragment.newInstance();
                     navigation.setSelectedItemId(R.id.navigation_home);
 
                     break;
@@ -132,7 +136,8 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
                     navigation.setSelectedItemId(R.id.navigation_notifications);
                     break;
                 default:
-                    fragment = PastEventFragment.newInstance();
+//                    fragment = PastEventFragment.newInstance();
+                    fragment = EventTabFragment.newInstance();
                     toolbar.setTitle(getString(R.string.marathon_events_2017));
                     break;
             }
@@ -196,10 +201,13 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
 
         Log.d(TAG,"clicked myrun ");
 
-        if(!item.photo_url.isEmpty()) {
+       /* if(!item.photo_url.isEmpty()) {
 
             createInstagramIntent(item.photo_url);
-        }
+        }*/
+
+        Intent intent = new Intent(this, SingleRunActivity.class);
+        startActivity(intent);
 
     }
 
@@ -208,7 +216,8 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
 
         Log.d(TAG, "onClickSyncRunButton");
 
-        fragment = PastEventFragment.newInstance();
+//        fragment = PastEventFragment.newInstance();
+        fragment = EventTabFragment.newInstance();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment).commit();
 
@@ -322,5 +331,10 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
 
         // Broadcast the Intent.
         startActivity(Intent.createChooser(share, "Share to"));
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:id="@+id/root_view"
+    android:background="@android:color/transparent"
     tools:context="com.irunseoul.android.app.activities.MarathonListActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -27,7 +28,7 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:alpha="0.4"
-        android:src="@drawable/landing_page_back"/>
+        android:src="@drawable/home_bg_2"/>
 
     <FrameLayout
         android:id="@+id/fragment_container"
