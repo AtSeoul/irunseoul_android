@@ -41,7 +41,7 @@
                 android:textAppearance="@style/RunTheme.MyRun.Subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
                 android:layout_marginEnd="@dimen/icon_margin"
                 android:layout_gravity="center_vertical"
                 android:text="@string/dummy_date"/>
@@ -51,14 +51,15 @@
             android:id="@+id/eventTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginEnd="@dimen/text_margin"
             android:text="@string/dummy_marathon_name"
             android:lines="2"
-            android:gravity="center_horizontal|center_vertical"
+            android:gravity="start|center_vertical"
             android:maxLines="2"
             android:ellipsize="end"
             android:textAppearance="@style/RunTheme.MyRun.Title"
-            android:layout_gravity="left|center_vertical"/>
+            android:layout_gravity="start|center_vertical"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,7 +142,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/text_margin_list_item"
-            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginEnd="@dimen/text_margin_list_item"
+            android:layout_gravity="end|bottom"
             android:src="@drawable/api_logo_strava"/>
 
 

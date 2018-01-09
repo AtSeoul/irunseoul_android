@@ -48,7 +48,7 @@ public class MyRunsRecycleViewAdapter extends RecyclerView.Adapter<MyRunsRecycle
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mEvents.get(position);
-        holder.mTitleView.setText(holder.mItem.title);
+        holder.mTitleView.setText(holder.mItem.run_name);
         holder.mDateView.setText(holder.mItem.date);
         holder.mRunDistance.setText(String.format(Locale.US, "%s KM",holder.mItem.distance));
         holder.mRunElapsedTime.setText(holder.mItem.moving_time);

@@ -80,7 +80,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 
     private static final String TAG = SingleEventActivity.class.getSimpleName();
     private static final int RQ_LOGIN = 109;
-    private static final int ITEMS_PER_PAGE = 80;
+    private static final int ITEMS_PER_PAGE = 200;
     private static final int DISTANCE_DIFFERENCE = 1000;
 
     private static final double SEOUL_LAT = 37.5559341;
@@ -187,7 +187,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                 .withClientID(clientId)
                 .withRedirectURI(redirctURL)
                 .withApprovalPrompt(ApprovalPrompt.AUTO.AUTO)
-                .withAccessScope(AccessScope.VIEW_PRIVATE)
+                .withAccessScope(AccessScope.PUBLIC)
                 .makeIntent();
         startActivityForResult(intent, RQ_LOGIN);
 
@@ -271,7 +271,12 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RQ_LOGIN && resultCode == RESULT_OK && data != null) {
 
-            progressDialog.show();
+            Log.d(TAG,"onActivityResult");
+
+            if(!progressDialog.isShowing()) {
+
+                progressDialog.show();
+            }
             String code = data.getStringExtra(StravaLoginActivity.RESULT_CODE);
             // Use code to obtain token
             getSravaToken(code);
@@ -347,7 +352,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 
 
                 float[] distanceResult = new float[1];
-                if(activity.getStartCoordinates() != null ) {
+                if(activity.getStartCoordinates() != null && !mLat.isEmpty() && !mLng.isEmpty()) {
                     Location.distanceBetween(activity.getStartCoordinates().getLatitude(),
                             activity.getStartCoordinates().getLongitude(),
                             Float.valueOf(mLat),
@@ -358,7 +363,8 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                 if (activity.getStartDateLocal().before(finishCalendar.getTime()) &&
                         activity.getStartDateLocal().after(calendar.getTime())) {
 
-                    if(/*distanceResult != null && distanceResult[0] < DISTANCE_DIFFERENCE*/ true) {
+//                    if(/*distanceResult != null && distanceResult[0] < DISTANCE_DIFFERENCE*/ true) {
+                    if(distanceResult != null && distanceResult[0] < DISTANCE_DIFFERENCE) {
 
 
                         wrapper.activity = activity;
@@ -396,11 +402,9 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                 Log.d(TAG, "result :" + wrapper);
                 addNewRun(wrapper);
             } else {
+                Log.d(TAG, "result : wrapper is null!!");
                 progressDialog.dismiss();
             }
-
-
-
 
         }
     }
@@ -536,5 +540,14 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
     private void showToastMessage(String msg) {
 
         Toast.makeText(SingleEventActivity.this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG,"onPause");
+        super.onPause();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }
