@@ -24,6 +24,7 @@
     <dimen name="my_run_button_height">48dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="app_bar_top">56dp</dimen>
+    <dimen name="button_padding">8dp</dimen>
 
 
 </resources>

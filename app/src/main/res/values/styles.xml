@@ -81,7 +81,7 @@
     </style>
 
     <style name="RunTheme.LandingPage.Title" parent="android:TextAppearance">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="fontPath">fonts/Roboto-Regular.ttf</item>
     </style>
