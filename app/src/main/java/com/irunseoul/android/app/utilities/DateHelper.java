@@ -70,6 +70,19 @@ public class DateHelper {
         return diff;
     }
 
+    public static String getRaceYear(String event_date) {
+
+        String result = "";
+
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm");
+
+        DateTime raceDate = fmt.parseDateTime(event_date);
+
+        result = raceDate.year().getAsShortText();
+
+        return result;
+    }
+
     public static boolean isApplicationPeriod(String application_end) {
 
         boolean result = false;

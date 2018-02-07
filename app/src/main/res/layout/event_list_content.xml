@@ -103,13 +103,6 @@
                     android:visibility="invisible"
                     android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/applicationImage"
-                        android:layout_width="@dimen/icon_size"
-                        android:layout_height="@dimen/icon_size"
-                        android:tint="@color/white"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_edit_black_36dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

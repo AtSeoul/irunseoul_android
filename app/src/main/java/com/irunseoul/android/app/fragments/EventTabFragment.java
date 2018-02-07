@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 
 import com.irunseoul.android.app.MarathonTabActivity;
 import com.irunseoul.android.app.R;
+import com.irunseoul.android.app.activities.AirQualityActivity;
+
+import kr.go.seoul.airquality.AirQualityTypeMini;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +37,8 @@ public class EventTabFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private AirQualityTypeMini typeMini;
 
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -89,6 +94,10 @@ public class EventTabFragment extends Fragment {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+//        typeMini = (AirQualityTypeMini) view.findViewById(R.id.type_mini);
+//
+//        typeMini.setOpenAPIKey(AirQualityActivity.KEY);
 
         return view;
     }

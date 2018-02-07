@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -27,7 +29,7 @@
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/RunTheme.NoActionBar"></activity>
+            android:theme="@style/RunTheme.NoActionBar" />
         <activity
             android:name=".activities.MarathonListActivity"
             android:label="@string/app_name"
@@ -96,6 +98,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.irunseoul.android.app.activities.MarathonListActivity" />
         </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".activities.MarathonListActivity"
+            android:theme="@style/RunTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.irunseoul.android.app.activities.MarathonListActivity" />
+        </activity>
+        <activity android:name=".activities.AirQualityActivity"
+            android:label="@string/title_activity_quality"
+            android:parentActivityName=".activities.MarathonListActivity"
+            android:theme="@style/RunTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.irunseoul.android.app.activities.MarathonListActivity" /></activity>
     </application>
 
 </manifest>

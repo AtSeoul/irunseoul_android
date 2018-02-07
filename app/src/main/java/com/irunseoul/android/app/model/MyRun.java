@@ -33,6 +33,8 @@ public class MyRun {
     public static final String ARG_WEBSITE = "website";
     public static final String ARG_APPLICATION_PERIOD = "application_period";
     public static final String ARG_PHONE = "phone";
+    public static final String ARG_KEY = "run_key";
+
 
 
 
@@ -61,7 +63,10 @@ public class MyRun {
     public String type;
     public String photo_url;
 
-
+    public String runKey = "";
+    public String achievement_count = "";
+    public String record_pic_url= "";
+    public String event_key = "";
 
     public MyRun() {
 
@@ -94,6 +99,7 @@ public class MyRun {
         this.moving_time_min = getFormattedMovingTimeMin(activity.getMovingTime());
         this.type = activity.getType().toString();
         this.photo_url = photo_url;
+        this.achievement_count = String.valueOf(activity.getAchievementCount());
 
 
     }
@@ -125,7 +131,9 @@ public class MyRun {
         result.put("average_speed", average_speed);
         result.put("type", type);
         result.put("photo_url", photo_url);
-
+        result.put("achievement_count", achievement_count);
+        result.put("record_pic_url", record_pic_url);
+        result.put("event_key", event_key);
 
         return result;
     }

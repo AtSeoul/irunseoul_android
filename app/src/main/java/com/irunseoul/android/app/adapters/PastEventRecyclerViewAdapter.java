@@ -122,7 +122,6 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
         public final TextView mDateView;
         public final ImageView mTempIcon;
         public final TextView mdaysLeft;
-        public final ImageView applicationImage;
         public final LinearLayout mApplicationStatus;
         public Event mItem;
 
@@ -134,7 +133,6 @@ public class PastEventRecyclerViewAdapter extends RecyclerView.Adapter<PastEvent
             mRunCity = (TextView) view.findViewById(R.id.runCity);
             mTempIcon = (ImageView) view.findViewById(R.id.runTempIcon);
             mdaysLeft = (TextView) view.findViewById(R.id.daysLeft);
-            applicationImage = (ImageView) view.findViewById(R.id.applicationImage);
             mApplicationStatus = (LinearLayout) view.findViewById(R.id.applicationStatus);
         }
 

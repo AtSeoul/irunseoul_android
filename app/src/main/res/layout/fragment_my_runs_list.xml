@@ -11,7 +11,7 @@
         android:layout_width="@dimen/my_run_button_width"
         android:layout_height="@dimen/my_run_button_height"
         android:text="@string/sync_your_first_run"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:id="@+id/syncFirstRun"
         android:textAppearance="@style/RunTheme.STATS.Subtitle"
         android:background="@color/colorPrimary"

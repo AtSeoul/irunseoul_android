@@ -2,6 +2,8 @@ package com.irunseoul.android.app;
 
 import android.app.Application;
 
+import com.onesignal.OneSignal;
+
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -22,5 +24,10 @@ public class MainApplication extends Application {
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
+
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
     }
 }

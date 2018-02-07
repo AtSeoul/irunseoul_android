@@ -43,6 +43,7 @@ import com.irunseoul.android.app.utilities.PreferencesHelper;
 import java.io.File;
 
 import butterknife.BindView;
+import kr.go.seoul.airquality.AirQualityDetailTypeA;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MarathonListActivity extends AppCompatActivity implements PastEventFragment.OnListFragmentInteractionListener,
@@ -190,6 +191,7 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
         intent.putExtra(Event.ARG_TEMPERATURE, item.temperature);
         intent.putExtra(Event.ARG_PHONE, item.phone);
         intent.putExtra(Event.ARG_APPLICATION_PERIOD, item.application_period);
+        intent.putExtra(Event.ARG_KEY, item.eventKey);
 //        intent.putExtra(Event.ARG_RACE, new HashMap<Integer, String>(item.race));
 
         startActivity(intent);
@@ -201,12 +203,9 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
 
         Log.d(TAG,"clicked myrun ");
 
-       /* if(!item.photo_url.isEmpty()) {
-
-            createInstagramIntent(item.photo_url);
-        }*/
-
         Intent intent = new Intent(this, SingleRunActivity.class);
+        intent.putExtra(MyRun.ARG_KEY, item.runKey);
+        intent.putExtra(MyRun.ARG_TITLE, item.run_name);
         startActivity(intent);
 
     }
@@ -286,6 +285,15 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
 
     }
 
+    @Override
+    public void clickSettings() {
+
+
+        Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
+
+    }
+
     private void signOut() {
         AuthUI.getInstance()
                 .signOut(this)
@@ -336,5 +344,33 @@ public class MarathonListActivity extends AppCompatActivity implements PastEvent
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if(id == R.id.action_air){
+
+//            createFilterDialog();
+
+//            Intent in = new Intent(MarathonListActivity.this, AirQualityActivity.class);
+//            startActivity(in);
+
+            Intent intent = new Intent(this, AirQualityDetailTypeA.class);
+            intent.putExtra("OpenAPIKey", AirQualityActivity.KEY);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

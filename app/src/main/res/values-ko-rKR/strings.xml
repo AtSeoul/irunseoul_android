@@ -1,67 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">iRunSeoul</string>
-    <string name="title_event_detail">event Detail</string>
-    <string name="application_period">Application Period</string>
-    <string name="weather">Weather Forecast</string>
+    <string name="app_name">Run Korea</string>
+    <string name="application_period">등록 기간</string>
+    <string name="weather">예상 날씨</string>
     <string name="race_date">Date</string>
     <string name="contact_number">Call</string>
-    <string name="website">Website</string>
-    <string name="daum_map">Daum Map</string>
+    <string name="website">웹사이트</string>
+    <string name="daum_map">다음 지도</string>
     <string name="login_strava">Strava Login</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="getting_started">Get Started</string>
     <string name="already_member">Already a member? Log in</string>
-    <string name="title_activity_marathon_list">MarathonListActivity</string>
     <string name="title_home">Recent</string>
-    <string name="title_dashboard">My runs</string>
+    <string name="title_dashboard">참가 대회</string>
     <string name="title_crews">크루</string>
     <string name="title_profile">Profile</string>
-    <string name="getting_started_page_text">Sync your run record from your favorite running app with corresponding Marathon!</string>
+    <string name="getting_started_page_text">국내 마라톤 대회 찾기 \n\n대회 일정, 장소, 날씨 정보를 확인하세요</string>
+
     <string name="unknown_response">Unexpected onActivityResult response code</string>
     <string name="unknown_sign_in_response">Unknown response from AuthUI sign-in</string>
     <string name="sign_in_cancelled">Sign in cancelled</string>
-    <string name="no_internet_connection">No internet connection</string>
+    <string name="no_internet_connection">네트워크 연결을 확인하세요</string>
     <string name="signed_in_header">You are signed in!</string>
-    <string name="sign_out">Sign out</string>
+    <string name="sign_out">로그아웃</string>
     <string name="unknown_error">An unknown error occurred</string>
     <string name="sign_out_failed">Sign out failed</string>
-    <string name="run_synced">Congrats! Run synced</string>
-    <string name="app_perioid">Application period : %s</string>
-    <string name="predict_weather">Predicted Weather : %s</string>
+    <string name="run_synced">성공</string>
+    <string name="app_perioid">등록 기간 : %s</string>
+    <string name="predict_weather">예상 날씨 : %s</string>
     <string name="stats">STATS</string>
-    <string name="marathon">My \n Marathons</string>
-    <string name="marathon_number">2</string>
-    <string name="marathon_year">in 2017</string>
+    <string name="marathon">마라톤 대회</string>
     <string name="marathon_upcoming_year">Upcoming Marathons in 2017</string>
     <string name="marathon_events_2017">마라톤 대회</string>
-    <string name="my_marathon_events">My Marathon events</string>
+    <string name="my_marathon_events">참가 대회</string>
     <string name="my_profile">My Profile</string>
-    <string name="network_not_available">You are not connected to Internet!</string>
-    <string name="sync_your_first_run">Sync your first run!</string>
-    <string name="d_day">D-%d</string>
-    <string name="d_days_ago">%d days ago</string>
-    <string name="today">Today</string>
+    <string name="network_not_available">네트워크 연결을 확인하세요!</string>
+    <string name="sync_your_first_run">스트라바 기록과 연동시키세요!</string>
+    <string name="today">오늘</string>
     <string name="filter_marathon_events">Filter Marathon Events</string>
 
     <string name="running">Running</string>
-    <string name="title_activity_single_event">Event</string>
+    <string name="title_activity_single_event">Race</string>
+
 
     <string name="processing">Processing..</string>
     <string name="fetching_data">Fetching data..</string>
-    <string name="already_added">Activity already added!</string>
+    <string name="already_added">이미 추가된 기록입니다!</string>
     <string name="error_user_fetch">Error: could not fetch user.</string>
-    <string name="no_activity_record">No activity record found!</string>
+    <string name="no_activity_record">"스트라바 기록이 없습니다!</string>
     <string name="logout">Logout</string>
     <string name="title_activity_single_run">SingleRunActivity</string>
     <string name="large_text"> large text </string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">설정</string>
     <string name="action_filter">Filter</string>
     <string name="action_search">Search</string>
     <string name="video">Video</string>
-    <string name="apply_now">접수중</string>
+    <string name="instagram">Instagram</string>
+    <string name="apply_now">Apply now</string>
+
 
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="title_activity_marathon_tab">MarathonTabActivity</string>
+    <string name="tab_text_1">진행 예정</string>
+    <string name="tab_text_2">2017 대회</string>
+    <string name="tab_text_4">과거</string>
+    <string name="tab_text_3">국제 대회</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="km_distance">KM DISTANCE</string>
+    <string name="duration">Minutes</string>
+    <string name="avg_speed">KM/H AVG. Speed</string>
+    <string name="achievements">ACHIEVEMENTS</string>
+    <string name="add_image_certificate">기록증 추가하기</string>
+    <string name="replace_image_certificate">기록증 변경하기</string>
+    <string name="km_distance_tit">KM</string>
+    <string name="five_km">5Km</string>
+    <string name="ten_km">10Km</string>
+    <string name="half_marathon">하프</string>
+    <string name="full_marathon">풀</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="run_korea_guide">Run Korea 가이드</string>
+    <string name="about_run_korea">Run Korea 소개</string>
+    <string name="strava_app">Strava App</string>
+    <string name="version">Version</string>
+    <string name="about_korea_text">Run Korea 앱은 대한민국 내 모든 마라톤 대회 정보를 제공합니다. 대회 완주 후,
+        스트라바와 연동하여 기록을 연동시킬 수 있습니다. 기록과 함께 대회 완주증 이미지, 스크린 샷을 추가할 수 있습니다.
+        프로필에서 최근 대회 기록(5KM, 10KM, 하프, 풀)을 확인할 수 있습니다. \n\n기여: 수진, 데릭, 경은,
+        하산 \nWebsite : https://runkorea.github.io/</string>
 
     <string-array  name="filter_array">
 
@@ -69,4 +96,5 @@
         <item>New Events</item>
 
     </string-array>
+    <string name="title_activity_quality">대기환경정보</string>
 </resources>

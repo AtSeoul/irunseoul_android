@@ -16,4 +16,11 @@
     <color name="black">#000000</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="status_level_color_1">#8bc34a</color>
+    <color name="status_level_color_2">#ffeb3b</color>
+
+    <color name="status_level_color_3">#fb8c00</color>
+    <color name="status_level_color_4">#f44336</color>
+
 </resources>

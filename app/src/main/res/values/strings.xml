@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Run Korea</string>
-    <string name="title_event_detail">event Detail</string>
+    <string name="title_event_detail" translatable="false">event Detail</string>
     <string name="application_period">Application Period</string>
     <string name="weather">Weather Forecast</string>
     <string name="race_date">Date</string>
@@ -9,15 +9,15 @@
     <string name="website">Website</string>
     <string name="daum_map">Daum Map</string>
     <string name="login_strava">Strava Login</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="getting_started">Get Started</string>
     <string name="already_member">Already a member? Log in</string>
-    <string name="title_activity_marathon_list">MarathonListActivity</string>
+    <string name="title_activity_marathon_list" translatable="false">MarathonListActivity</string>
     <string name="title_home">Recent</string>
     <string name="title_dashboard">My runs</string>
     <string name="title_crews">Crews</string>
     <string name="title_profile">Profile</string>
-    <string name="getting_started_page_text">Sync your run record from your favorite running app with corresponding Marathon!</string>
+    <string name="getting_started_page_text">Find Marathons in Korea \n\nSchedule, location and weather information</string>
     <string name="dummy_marathon_name" translatable="false">Seoul International Marathon - Donga Ilbo blah blah</string>
     <string name="dummy_location" translatable="false">Seoul Olympics Park Station</string>
 
@@ -33,17 +33,17 @@
     <string name="app_perioid">Application period : %s</string>
     <string name="predict_weather">Predicted Weather : %s</string>
     <string name="stats">STATS</string>
-    <string name="marathon">My \n Marathons</string>
-    <string name="marathon_number">2</string>
-    <string name="marathon_year">in 2017</string>
+    <string name="marathon">Races</string>
+    <string name="marathon_number" translatable="false">2</string>
+    <string name="marathon_year" translatable="false">in 2017</string>
     <string name="marathon_upcoming_year">Upcoming Marathons in 2017</string>
     <string name="marathon_events_2017">Races</string>
     <string name="my_marathon_events">My Races</string>
     <string name="my_profile">My Profile</string>
     <string name="network_not_available">You are not connected to Internet!</string>
-    <string name="sync_your_first_run">Sync your first run!</string>
-    <string name="d_day">D-%d</string>
-    <string name="d_days_ago">%d days ago</string>
+    <string name="sync_your_first_run">Sync record from Strava!</string>
+    <string name="d_day" translatable="false">D-%d</string>
+    <string name="d_days_ago" translatable="false">%d days ago</string>
     <string name="today">Today</string>
     <string name="filter_marathon_events">Filter Marathon Events</string>
 
@@ -54,7 +54,7 @@
     <string name="dummy_distance" translatable="false">5.01 KM</string>
     <string name="dumy_city" translatable="false">Seoul</string>
     <string name="dummy_speed" translatable="false">8.5 KM/H</string>
-    <string name="title_activity_single_event">Event</string>
+    <string name="title_activity_single_event">Race</string>
     <string name="dummy_app_perioid" translatable="false">Application period : 2016/7/1 - 2016/11/28</string>
     <string name="dummy_weather" translatable="false">Predicted Weather : 2.9C</string>
     <string name="dummy_temp" translatable="false">2.9C</string>
@@ -94,12 +94,33 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="km_distance">KM DISTANCE</string>
-    <string name="duration">DURATION</string>
+    <string name="duration">Minutes</string>
     <string name="avg_speed">KM/H AVG. Speed</string>
     <string name="achievements">ACHIEVEMENTS</string>
-    <string name="dummy_number">4</string>
+    <string name="dummy_number" translatable="false">0</string>
     <string name="add_image_certificate">Add Record Image</string>
+    <string name="replace_image_certificate">Replace Record Image</string>
+    <string name="km_distance_tit">KM</string>
+    <string name="dummy_distance_num" translatable="false">0</string>
+    <string name="five_km">5Km</string>
+    <string name="ten_km">10Km</string>
+    <string name="half_marathon">Half</string>
+    <string name="full_marathon">Full</string>
+    <string name="dummy_total_time" translatable="false">0</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="run_korea_guide">Run Korea Guide</string>
+    <string name="about_run_korea">About Run Korea app</string>
+    <string name="strava_app">Strava App</string>
+    <string name="version">Version</string>
+    <string name="version_num" translatable="false">1.2.6</string>
+    <string name="about_korea_text">RunKorea app provides information about Marathon Events in South Korea.
+        After completing a race, You can connect with Strava and bring in your  activity stats to this app.
+        In addition, you can also add certificate screenshot or image file of your race. Lastly, you can
+        see graphs of your race times in Profile (5KM, 10KM, Half and Full Marathon). \n\n
+        Contributors : Sujin, Derrick, Gyeongun and Hassan  \n\n
+        Website : https://runkorea.github.io/</string>
 
+    <string name="title_activity_quality">Air Quality Info.</string>
 
 
 </resources>

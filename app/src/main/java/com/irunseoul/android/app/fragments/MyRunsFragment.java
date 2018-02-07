@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,9 +46,7 @@ public class MyRunsFragment extends Fragment {
 
     private static final String TAG = MyRunsFragment.class.getSimpleName();
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnMyRunFragmentInteractionListener mListener;
 
@@ -59,16 +58,12 @@ public class MyRunsFragment extends Fragment {
     private RecyclerView pastEventsRecyclerView;
     private AlertDialog progressDialog;
 
+    private Button syncRunButton;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public MyRunsFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+
     public static MyRunsFragment newInstance() {
         MyRunsFragment fragment = new MyRunsFragment();
         Bundle args = new Bundle();
@@ -94,6 +89,7 @@ public class MyRunsFragment extends Fragment {
 
 
         pastEventsRecyclerView = (RecyclerView) view.findViewById(R.id.myRunlist);
+        syncRunButton = (Button) view.findViewById(R.id.syncFirstRun);
 
         progressDialog = new SpotsDialog(getActivity(), getActivity().getResources().getString(R.string.fetching_data));
 
@@ -174,9 +170,12 @@ public class MyRunsFragment extends Fragment {
 //                String value = dataSnapshot.getValue(String.class);
                 myRunList = new ArrayList<>();
                 if(dataSnapshot.exists()) {
+                    syncRunButton.setVisibility(View.INVISIBLE);
                     for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
 
+
                         MyRun event = eventSnapshot.getValue(MyRun.class);
+                        event.runKey = eventSnapshot.getKey();
                         myRunList.add(event);
                         Log.d(TAG, "eventSnapshot key("+ eventSnapshot.getKey() + "): " + event.title);
 
@@ -184,6 +183,8 @@ public class MyRunsFragment extends Fragment {
                     pastEventsRecyclerView.setAdapter(new MyRunsRecycleViewAdapter(myRunList, mListener));
                     Log.d(TAG, "Count is: " + dataSnapshot.getChildrenCount());
 
+                } else {
+                    syncRunButton.setVisibility(View.VISIBLE);
                 }
                 progressDialog.dismiss();
 

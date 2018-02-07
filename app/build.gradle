@@ -1,3 +1,11 @@
+plugins {
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin' version '0.8.0'
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
 apply plugin: 'com.android.application'
 
 android {
@@ -15,10 +23,13 @@ android {
         applicationId "com.irunseoul.android.app"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 4
-        versionName "1.0"
+        versionCode 6
+        versionName "1.2"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
+        manifestPlaceholders = [onesignal_app_id               : "079cf3eb-8070-4445-adb8-7979c14d4253",
+                                // Project number pulled from dashboard, local value is ignored.
+                                onesignal_google_project_number: "REMOTE"]
     }
     buildTypes {
         release {
@@ -42,6 +53,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile project(":airquality-release")
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
@@ -58,6 +70,12 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.github.d-max:spots-dialog:0.7@aar'
     compile 'com.github.apl-devs:appintro:v4.2.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.onesignal:OneSignal:[3.6.5, 3.99.99]'
+    compile 'com.kbeanie:multipicker:1.1.31@aar'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'info.hoang8f:android-segmented:1.0.6'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

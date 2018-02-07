@@ -44,6 +44,7 @@ import com.irunseoul.android.app.model.Event;
 import com.irunseoul.android.app.model.MyRun;
 import com.irunseoul.android.app.model.StravaResultWrapper;
 import com.irunseoul.android.app.model.User;
+import com.irunseoul.android.app.utilities.DateHelper;
 import com.irunseoul.android.app.utilities.PreferencesHelper;
 import com.sweetzpot.stravazpot.activity.api.ActivityAPI;
 import com.sweetzpot.stravazpot.activity.api.PhotoAPI;
@@ -100,6 +101,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
     private String mCity;
     private String mEmail;
     private String mHost;
+    private String mEventKey = "";
 
     private DatabaseReference mDatabase;
     private Query mExistingRunQuery;
@@ -121,9 +123,6 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
 
     @BindView(R.id.eventTemp)
     TextView eventTemp;
-
-    @BindView(R.id.eventSynced)
-    ImageView syncEventImg;
 
     @BindView(R.id.eventWebsite)
     Button eventWebsite;
@@ -160,6 +159,7 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
         mCity = getIntent().getStringExtra(Event.ARG_CITY);
         mEmail = getIntent().getStringExtra(Event.ARG_EMAIL);
         mHost = getIntent().getStringExtra(Event.ARG_HOST);
+        mEventKey = getIntent().getStringExtra(Event.ARG_KEY);
 
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
@@ -479,6 +479,9 @@ public class SingleEventActivity extends AppCompatActivity implements OnMapReady
                     String run_map = "strava";
                     MyRun run = new MyRun(userId, mCity, mDate, mHost, mTitle, mWeather, mWebsite, mLat,
                             mLng, mLocation, mMapUrl, mTemperature, run_map, activity, photo_url);
+
+                    String event_key = DateHelper.getRaceYear(mDate) + "_" + mEventKey;
+
                     Map<String, Object> postValues = run.toMap();
 
                     Map<String, Object> childUpdates = new HashMap<>();

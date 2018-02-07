@@ -26,7 +26,7 @@ public class Event {
     public static final String ARG_WEBSITE = "website";
     public static final String ARG_APPLICATION_PERIOD = "application_period";
     public static final String ARG_PHONE = "phone";
-
+    public static final String ARG_KEY = "event_key";
 
 
 
@@ -45,6 +45,7 @@ public class Event {
     public String title;
     public String weather;
     public String website;
+    public String eventKey = "";
 
 
     public  Event() {

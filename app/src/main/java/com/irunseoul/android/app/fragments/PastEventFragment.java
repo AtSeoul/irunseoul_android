@@ -191,6 +191,8 @@ public class PastEventFragment extends Fragment {
 
     private void addFirebaseEventListener() {
 
+        progressDialog.show();
+
         mEventsQuery.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -203,6 +205,7 @@ public class PastEventFragment extends Fragment {
                     for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
 
                         Event event = eventSnapshot.getValue(Event.class);
+                        event.eventKey = eventSnapshot.getKey();
                         mEventList.add(event);
                         Log.d(TAG, "eventSnapshot key(" + eventSnapshot.getKey() + "): " + event.title);
 
@@ -281,5 +284,15 @@ public class PastEventFragment extends Fragment {
         mEventsQuery = mDatabase.child(DateHelper.getCurrentYear()).orderByChild("date").startAt(DateHelper.getCurrentDate());
         addFirebaseEventListener();
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if(progressDialog != null && progressDialog.isShowing()) {
+
+            progressDialog.dismiss();
+        }
     }
 }

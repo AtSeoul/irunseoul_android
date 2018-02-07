@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.irunseoul.android.app.R;
 import com.irunseoul.android.app.model.User;
+import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -251,6 +252,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "writeNewuser ; failure : " + e.getMessage());
             }
         });
+        // Call syncHashedEmail anywhere in your app if you have the user's email.
+        // This improves the effectiveness of OneSignal's "best-time" notification scheduling feature.
+         OneSignal.syncHashedEmail(email);
     }
 
     @Override
